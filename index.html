@@ -20,7 +20,7 @@ body.port #main{align-items:flex-start;flex:none}
 #holder{position:relative;flex:none}
 #wrap{position:absolute;left:0;top:0;transform-origin:0 0}
 #wrap.land{width:1000px;height:560px}
-#wrap.port{width:420px;height:890px}
+#wrap.port{width:420px;height:920px}
 [hidden]{display:none!important}
 button{font-family:inherit;cursor:pointer;color:inherit}
 button:focus-visible{outline:4px solid #fff;outline-offset:2px}
@@ -35,7 +35,7 @@ button:focus-visible{outline:4px solid #fff;outline-offset:2px}
 .land #coder{left:516px;top:0;width:484px;height:560px;clip-path:polygon(1.5% 0,100% 0,100% 100%,0 100%)}
 .land #coder>.in{clip-path:polygon(1.5% 0,100% 0,100% 100%,0 100%)}
 .port #scene{left:0;top:0;width:420px;height:370px}
-.port #coder{left:0;top:362px;width:420px;height:528px}
+.port #coder{left:0;top:362px;width:420px;height:558px}
 .port .pb{font-size:14px;padding:0 2px;gap:2px}.port .pb .pl{display:none}.port #reset{width:40px;flex:none}
 
 /* scene */
@@ -290,6 +290,34 @@ button:focus-visible{outline:4px solid #fff;outline-offset:2px}
 .bf.hh{animation:shk .35s}
 .bf .fly.on .b{box-shadow:0 0 18px 10px hsla(var(--h),100%,60%,.9),0 0 50px 22px hsla(var(--h),100%,55%,.5)}
 @media (prefers-reduced-motion:reduce){.bigbtn,.pip.cur,.bf.hh{animation:none!important}#wcard.show{animation:none}}
+
+#prog{gap:6px;justify-content:flex-start}
+.prow{flex:none;display:flex;align-items:center;gap:10px;border:3px solid #000;border-radius:12px;padding:3px 12px;font-weight:900;font-size:21px;min-height:36px}
+.prow .ic{width:26px;height:26px}
+.prow.rrep{background:#ff9f1c;color:#2a1200;padding:4px 12px}
+.prow.on{background:#ffe14d}.prow.off{background:#8a97c4}.prow.wait{background:#6ee0d0;padding:4px 12px}
+.prow.run{box-shadow:0 0 0 4px #fff,0 0 14px 5px #ffd23f;animation:tpl .33s ease-in-out infinite alternate;position:relative;z-index:2}
+.num{margin-inline-start:auto;display:flex;flex-direction:column;align-items:center;gap:3px}
+.hint{display:flex;align-items:center;gap:5px;height:21px;padding:0 9px;border:2.5px solid #000;border-radius:11px;background:#0b1233;color:#fff;font-size:13px;font-weight:900}
+.hint.empty{visibility:hidden}
+.hint .fd{width:11px;height:11px;border-radius:50%;background:hsl(var(--h) 100% 62%);box-shadow:0 0 6px hsl(var(--h) 100% 60%)}
+.hint .ic{width:14px;height:14px}
+.hint.ok{border-color:#3ddc84;color:#7dffb0}
+.hint.bad{border-color:#ff5a4a;color:#ffb0a8;animation:pp .7s infinite}
+.num .st{display:flex;gap:7px}
+.st .big{width:52px;height:48px;border:3px solid #000;border-radius:12px;background:#fff;font:900 34px/1 'Trebuchet MS',Verdana,sans-serif;box-shadow:0 4px 0 #000;padding:0;color:#1a1020}
+.st .big:active{transform:translateY(3px);box-shadow:0 1px 0 #000}
+.st .big[disabled]{opacity:.3}
+.num .st b{min-width:56px;height:48px;line-height:42px;font-size:32px}
+#run{flex:3;height:68px;font-size:30px;border-radius:14px}
+#show{flex:1.1;height:68px;font-size:14px;flex-direction:column;gap:2px}
+#run .ic{width:34px;height:34px}
+.sc{height:14px}
+.srow{height:20px}
+.srow .si{width:20px;height:20px}
+.sx{font-size:14px;min-width:30px}
+#strips{padding:4px 8px;gap:3px}
+@media (prefers-reduced-motion:reduce){.hint.bad,.prow.run{animation:none!important}}
 </style>
 </head>
 <body>
@@ -312,6 +340,7 @@ button:focus-visible{outline:4px solid #fff;outline-offset:2px}
 <symbol id="i-next" viewBox="0 0 24 24"><path d="M3 12h15M12 5l7 7-7 7" fill="none" stroke="#2a1200" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-jar" viewBox="0 0 24 24"><path d="M7 3h10v3l2 3v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V9l2-3z" fill="#fff7" stroke="#1a1020" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12" cy="15" r="3.2" fill="#ffb300"/></symbol>
 <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3 7 7.4.6-5.6 4.8 1.8 7.2L12 17.8 5.4 21.6l1.8-7.2L1.6 9.6 9 9z" stroke-linejoin="round"/></symbol>
+<symbol id="i-ar-up" viewBox="0 0 24 24"><path d="M12 2 3 13h6v9h6v-9h6z"/></symbol><symbol id="i-ar-dn" viewBox="0 0 24 24"><path d="M12 22 3 11h6V2h6v9h6z"/></symbol><symbol id="i-ok" viewBox="0 0 24 24"><path d="M3 13l6 6L21 6" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </defs>
 </svg>
 
@@ -341,17 +370,7 @@ button:focus-visible{outline:4px solid #fff;outline-offset:2px}
     <div class="srow" id="srM"><svg class="si"><use href="#i-on"/></svg><div class="scells"></div><b class="sx"></b></div>
   </div>
   <div id="tabs"></div>
-  <div id="prog">
-    <div class="rep"><svg class="ic"><use href="#i-loop"/></svg><span data-t="rep"></span><span class="st" id="repst"></span><span id="razt"></span><span class="sp"></span></div>
-    <div id="body"></div>
-    <div class="caprow"><div class="repcap"></div><button id="undo" hidden data-t="undo"></button></div>
-  </div>
-  <div id="pal">
-    <button class="pb on" data-add="on"><span class="pl">+</span><svg class="ic"><use href="#i-on"/></svg><span data-t="on"></span></button>
-    <button class="pb off" data-add="off"><span class="pl">+</span><svg class="ic"><use href="#i-off"/></svg><span data-t="off"></span></button>
-    <button class="pb wait" data-add="wait"><span class="pl">+</span><svg class="ic"><use href="#i-wait"/></svg><span data-t="wait"></span></button>
-    <button class="pb" id="reset" data-a="reset"><svg class="ic"><use href="#i-reset"/></svg></button>
-  </div>
+  <div id="prog"></div>
   <div id="lua"><svg class="hi" viewBox="0 0 100 110"><rect x="12" y="8" width="64" height="62" rx="5" fill="#8b94a0" stroke="#222" stroke-width="5"/><rect x="22" y="18" width="44" height="40" fill="#0e1a14"/><rect x="31" y="28" width="9" height="11" fill="#5dff8a"/><rect x="50" y="28" width="9" height="11" fill="#5dff8a"/><rect x="32" y="45" width="26" height="5" fill="#5dff8a"/></svg><div id="luat"></div></div>
   <div id="ctl">
     <button id="run"><svg class="ic"><use href="#i-play"/></svg>Запустить</button>
@@ -376,51 +395,51 @@ button:focus-visible{outline:4px solid #fff;outline-offset:2px}
 
 <script>
 window.T={
-RU:{lang:'ru',dir:'ltr',g1:'Уровень 1: повтори ритм Сони',g2:'Уровень 2: повтори ритм Шустрика',g3:'Уровень 3: повтори ритм Пульса',g4:'Уровень 4: повтори двойную вспышку',g5:'Уровень 5: хор из 3 светлячков',a1:'Поменяй числа',a2:'Добавь плитки',a3:'Выбери светлячка, сделай 3 ритма',wc1:'Светлячок прилетел!',wc2:'Уровень {n} из 5 пройден',nx:'Дальше:',bonusU:'Открыта мини-игра!',bonus:'Поймай светлячка',back:'Назад к уровням',hihi:'Хи-хи!',jar:'Банка',cardNext:'Следующий светлячок',cardEnd:'Финал',runall:'Запустить всех',tab:'Светлячок',look:'Смотри сюда!',bh:'Жми на светлячка, пока он светится!',d1:'Здесь светлячок уже темнеет, а твоя лампа ещё горит.',d2:'Здесь светлячок светится, а твоя лампа тёмная.',d3:'Светлячок ещё мигает, а твоя лампа уже остановилась.',d4:'Светлячок уже замер, а твоя лампа мигает дальше.',undo:'Вернуть',bang:'Сбой!',bye:'Сбой отступил!',n1:'Соня: сонный светлячок',n2:'Шустрик: очень быстрый',n3:'Пульс: бьётся как сердце',n4:'Двойняшка: две вспышки',n5:'Хор: три светлячка',rep:'повтори',tm1:'раз',tm:'раза',on:'включи',off:'выключи',wait:'подожди',run:'Запустить',stop:'Стоп',show:'Светлячок',next:'Дальше',again:'Сыграть ещё',reset:'Сначала',help:'Подсказка',snd:'Звук',up:'Вверх',dn:'Вниз',rm:'Убрать',go:'Поехали',
+RU:{lang:'ru',dir:'ltr',a5:'Выбери светлячка, поставь 3 числа',a4:'Поменяй два числа',g1:'Уровень 1: повтори ритм Сони',g2:'Уровень 2: повтори ритм Шустрика',g3:'Уровень 3: повтори ритм Пульса',g4:'Уровень 4: повтори два числа',g5:'Уровень 5: хор из 3 светлячков',a1:'Поменяй число повторов',a2:'Поменяй тёмную паузу',a3:'Поменяй время света',wc1:'Светлячок прилетел!',wc2:'Уровень {n} из 5 пройден',nx:'Дальше:',bonusU:'Открыта мини-игра!',bonus:'Поймай светлячка',back:'Назад к уровням',hihi:'Хи-хи!',jar:'Банка',cardNext:'Следующий светлячок',cardEnd:'Финал',runall:'Запустить всех',tab:'Светлячок',look:'Смотри сюда!',bh:'Жми на светлячка, пока он светится!',d1:'Здесь светлячок уже темнеет, а твоя лампа ещё горит.',d2:'Здесь светлячок светится, а твоя лампа тёмная.',d3:'Светлячок ещё мигает, а твоя лампа уже остановилась.',d4:'Светлячок уже замер, а твоя лампа мигает дальше.',undo:'Вернуть',bang:'Сбой!',bye:'Сбой отступил!',n1:'Соня: сонный светлячок',n2:'Шустрик: очень быстрый',n3:'Пульс: бьётся как сердце',n4:'Мечтатель: долгие паузы',n5:'Хор: три светлячка',rep:'повтори',tm1:'раз',tm:'раза',on:'включи',off:'выключи',wait:'подожди',run:'Запустить',stop:'Стоп',show:'Светлячок',next:'Дальше',again:'Сыграть ещё',reset:'Сначала',help:'Подсказка',snd:'Звук',up:'Вверх',dn:'Вниз',rm:'Убрать',go:'Поехали',
  stopm:'Стоп! Можно поменять программу.',resetm:'Программа сначала. Смотри на светлячка!',miss:'Сбой мигнул! Посмотри на светлячка ещё раз.',none:'Лампа не мигнула. Нужны «включи» и «подожди».',win:'Получилось! Светлячок летит к лампе!',winf:'Какой ритм! Смотри, светлячок отвечает!',winf2:'Светлячки ответили твоим ритмом!',fin:'Ты говоришь на языке светлячков!',free:'Придумай свой ритм и нажми ▶. Светлячки ответят!',
  t1:'Смотри: светлячок мигает. Запомни ритм!',t2:'Это твоя программа. Меняй числа кнопками − и +.',t3:'Нажми ▶. Лампа мигнёт по программе.',
- i1:'В чаще мигает светлячок! Позови его своей лампой.',i2:'Новый светлячок! Он мигает по-другому.',i3:'Этот светит подольше. Смотри внимательно!',i4:'Две быстрые вспышки и долгая пауза!',i5:'Хор! У каждого светлячка свой ритм. Потом запусти всех.',
- h1:'Пусть лампа мигнёт 3 раза. Поменяй одно число.',h2:'Этот ждёт в темноте дольше. Смотри на «подожди» после «выключи».',h3:'Светит долго, гаснет быстро. И повторов теперь 2.',h4:'Нужно два «включи» внутри повтора. Добавь «включи», «подожди», «выключи», «подожди».',h5:'Выбирай вкладку и делай ритм для каждого. Любое шоу подойдёт!'},
-EN:{lang:'en',dir:'ltr',g1:'Level 1: copy the sleepy firefly',g2:'Level 2: copy Zippy\'s rhythm',g3:'Level 3: copy Pulse\'s rhythm',g4:'Level 4: copy the double flash',g5:'Level 5: a chorus of 3 fireflies',a1:'Change the numbers',a2:'Add tiles',a3:'Pick a firefly, make 3 rhythms',wc1:'The firefly arrived!',wc2:'Level {n} of 5 done',nx:'Next:',bonusU:'Bonus game unlocked!',bonus:'Catch fireflies',back:'Back to levels',hihi:'Hee-hee!',jar:'Jar',cardNext:'Next firefly',cardEnd:'Finale',runall:'Run all',tab:'Firefly',look:'Look here!',bh:'Click a firefly while it glows!',d1:'Here the firefly is dark, but your lamp is still on.',d2:'Here the firefly glows, but your lamp is dark.',d3:'The firefly keeps blinking, but your lamp stopped.',d4:'The firefly stopped, but your lamp keeps blinking.',undo:'Undo',bang:'Glitch!',bye:'Glitch ran away!',n1:'Sleepy: a slow firefly',n2:'Zippy: super fast',n3:'Pulse: beats like a heart',n4:'Twin: double flash',n5:'Chorus: three fireflies',rep:'repeat',tm1:'time',tm:'times',on:'on',off:'off',wait:'wait',run:'Run',stop:'Stop',show:'Firefly',next:'Next',again:'Play again',reset:'Start over',help:'Hint',snd:'Sound',up:'Up',dn:'Down',rm:'Remove',go:"Let's go",
+ i1:'Светлячок мигает! Сделай так же. Нажми +.',i2:'Этот светлячок дольше сидит в темноте. Поменяй последнее число.',i3:'Этот светит дольше. Поменяй число, пока горит.',i4:'Теперь отличаются два числа. Сделай как у светлячка!',i5:'Хор! Выбери светлячка и поставь его 3 числа. Потом запусти всех.',
+ h1:'Жми + у числа повторов, пока оно не совпадёт со светлячком.',h2:'Поменяй число у второго «подожди», пока оно не совпадёт.',h3:'Поменяй число у первого «подожди», пока оно не совпадёт.',h4:'Поменяй число повторов и последнее «подожди». Мигающие числа надо менять.',h5:'Выбирай вкладку и меняй числа. Любое шоу подойдёт!'},
+EN:{lang:'en',dir:'ltr',a5:'Pick a firefly, set 3 numbers',a4:'Change two numbers',g1:'Level 1: copy the sleepy firefly',g2:'Level 2: copy Zippy\'s rhythm',g3:'Level 3: copy Pulse\'s rhythm',g4:'Level 4: copy two numbers',g5:'Level 5: a chorus of 3 fireflies',a1:'Change the repeat number',a2:'Change the dark pause',a3:'Change the glowing time',wc1:'The firefly arrived!',wc2:'Level {n} of 5 done',nx:'Next:',bonusU:'Bonus game unlocked!',bonus:'Catch fireflies',back:'Back to levels',hihi:'Hee-hee!',jar:'Jar',cardNext:'Next firefly',cardEnd:'Finale',runall:'Run all',tab:'Firefly',look:'Look here!',bh:'Click a firefly while it glows!',d1:'Here the firefly is dark, but your lamp is still on.',d2:'Here the firefly glows, but your lamp is dark.',d3:'The firefly keeps blinking, but your lamp stopped.',d4:'The firefly stopped, but your lamp keeps blinking.',undo:'Undo',bang:'Glitch!',bye:'Glitch ran away!',n1:'Sleepy: a slow firefly',n2:'Zippy: super fast',n3:'Pulse: beats like a heart',n4:'Dreamy: long pauses',n5:'Chorus: three fireflies',rep:'repeat',tm1:'time',tm:'times',on:'on',off:'off',wait:'wait',run:'Run',stop:'Stop',show:'Firefly',next:'Next',again:'Play again',reset:'Start over',help:'Hint',snd:'Sound',up:'Up',dn:'Down',rm:'Remove',go:"Let's go",
  stopm:'Stop! You can change the program.',resetm:'Fresh start. Watch the firefly!',miss:'The Glitch blinked! Watch the firefly again.',none:'The lamp did not blink. You need "on" and "wait".',win:'You did it! The firefly flies to the lamp!',winf:'What a rhythm! The firefly answers!',winf2:'The fireflies answered with your rhythm!',fin:'You speak the language of fireflies!',free:'Make up your rhythm and press ▶. The fireflies will answer!',
  t1:'Look: the firefly is blinking. Remember the rhythm!',t2:'This is your program. Change numbers with − and +.',t3:'Press ▶. The lamp will blink your program.',
- i1:'A firefly blinks in the forest! Call it with your lamp.',i2:'A new firefly! It blinks differently.',i3:'This one glows longer. Watch closely!',i4:'Two quick flashes and a long pause!',i5:'A chorus! Give each firefly its own rhythm. Then run them all.',
- h1:'Make the lamp blink 3 times. Change one number.',h2:'This one waits longer in the dark. Look at "wait" after "off".',h3:'It glows long and goes dark fast. And now 2 repeats.',h4:'You need two "on" inside the repeat. Add "on", "wait", "off", "wait".',h5:'Pick a tab and build a rhythm for each firefly. Any show works!'},
-ES:{lang:'es',dir:'ltr',g1:'Nivel 1: copia a la luciérnaga dormilona',g2:'Nivel 2: copia el ritmo de Rayo',g3:'Nivel 3: copia el ritmo de Latido',g4:'Nivel 4: copia el doble destello',g5:'Nivel 5: un coro de 3 luciérnagas',a1:'Cambia los números',a2:'Añade bloques',a3:'Elige una luciérnaga: 3 ritmos',wc1:'¡La luciérnaga llegó!',wc2:'Nivel {n} de 5 completado',nx:'Sigue:',bonusU:'¡Minijuego desbloqueado!',bonus:'Atrapa luciérnagas',back:'Volver a los niveles',hihi:'¡Ji, ji!',jar:'Tarro',cardNext:'Siguiente luciérnaga',cardEnd:'Final',runall:'Ejecutar todas',tab:'Luciérnaga',look:'¡Mira aquí!',bh:'¡Pulsa una luciérnaga mientras brilla!',d1:'Aquí la luciérnaga ya está oscura, pero tu lámpara sigue encendida.',d2:'Aquí la luciérnaga brilla, pero tu lámpara está apagada.',d3:'La luciérnaga sigue parpadeando, pero tu lámpara se paró.',d4:'La luciérnaga ya paró, pero tu lámpara sigue parpadeando.',undo:'Deshacer',bang:'¡Fallo!',bye:'¡El Fallo huyó!',n1:'Dormilón: luciérnaga lenta',n2:'Rayo: muy rápida',n3:'Latido: late como un corazón',n4:'Gemelo: doble destello',n5:'Coro: tres luciérnagas',rep:'repite',tm1:'vez',tm:'veces',on:'enciende',off:'apaga',wait:'espera',run:'Ejecutar',stop:'Parar',show:'Luciérnaga',next:'Siguiente',again:'Jugar otra vez',reset:'Empezar de nuevo',help:'Pista',snd:'Sonido',up:'Arriba',dn:'Abajo',rm:'Quitar',go:'¡Vamos!',
+ i1:'A firefly blinks! Make your lamp blink the same. Press +.',i2:'This firefly stays dark longer. Change the last number.',i3:'This one glows longer. Change the glowing number.',i4:'Two numbers are different now. Match the firefly!',i5:'Chorus! Pick a firefly and set its 3 numbers. Then run them all.',
+ h1:'Press + on the repeat number until it matches the firefly.',h2:'Change the number of the second "wait" until it matches.',h3:'Change the number of the first "wait" until it matches.',h4:'Change the repeat number and the last "wait". Blinking numbers need a change.',h5:'Pick a tab and change the numbers. Any show works!'},
+ES:{lang:'es',dir:'ltr',a5:'Elige una luciérnaga: 3 números',a4:'Cambia dos números',g1:'Nivel 1: copia a la luciérnaga dormilona',g2:'Nivel 2: copia el ritmo de Rayo',g3:'Nivel 3: copia el ritmo de Latido',g4:'Nivel 4: copia dos números',g5:'Nivel 5: un coro de 3 luciérnagas',a1:'Cambia las repeticiones',a2:'Cambia la pausa a oscuras',a3:'Cambia el tiempo de luz',wc1:'¡La luciérnaga llegó!',wc2:'Nivel {n} de 5 completado',nx:'Sigue:',bonusU:'¡Minijuego desbloqueado!',bonus:'Atrapa luciérnagas',back:'Volver a los niveles',hihi:'¡Ji, ji!',jar:'Tarro',cardNext:'Siguiente luciérnaga',cardEnd:'Final',runall:'Ejecutar todas',tab:'Luciérnaga',look:'¡Mira aquí!',bh:'¡Pulsa una luciérnaga mientras brilla!',d1:'Aquí la luciérnaga ya está oscura, pero tu lámpara sigue encendida.',d2:'Aquí la luciérnaga brilla, pero tu lámpara está apagada.',d3:'La luciérnaga sigue parpadeando, pero tu lámpara se paró.',d4:'La luciérnaga ya paró, pero tu lámpara sigue parpadeando.',undo:'Deshacer',bang:'¡Fallo!',bye:'¡El Fallo huyó!',n1:'Dormilón: luciérnaga lenta',n2:'Rayo: muy rápida',n3:'Latido: late como un corazón',n4:'Soñador: pausas largas',n5:'Coro: tres luciérnagas',rep:'repite',tm1:'vez',tm:'veces',on:'enciende',off:'apaga',wait:'espera',run:'Ejecutar',stop:'Parar',show:'Luciérnaga',next:'Siguiente',again:'Jugar otra vez',reset:'Empezar de nuevo',help:'Pista',snd:'Sonido',up:'Arriba',dn:'Abajo',rm:'Quitar',go:'¡Vamos!',
  stopm:'¡Alto! Puedes cambiar el programa.',resetm:'Programa nuevo. ¡Mira a la luciérnaga!',miss:'¡El Fallo parpadeó! Mira a la luciérnaga otra vez.',none:'La lámpara no parpadeó. Necesitas "enciende" y "espera".',win:'¡Lo lograste! ¡La luciérnaga vuela a la lámpara!',winf:'¡Qué ritmo! ¡La luciérnaga responde!',winf2:'¡Las luciérnagas respondieron con tu ritmo!',fin:'¡Hablas el idioma de las luciérnagas!',free:'Inventa tu ritmo y pulsa ▶. ¡Las luciérnagas responderán!',
  t1:'Mira: la luciérnaga parpadea. ¡Recuerda el ritmo!',t2:'Este es tu programa. Cambia los números con − y +.',t3:'Pulsa ▶. La lámpara parpadeará tu programa.',
- i1:'¡Una luciérnaga parpadea en el bosque! Llámala con tu lámpara.',i2:'¡Otra luciérnaga! Parpadea distinto.',i3:'Esta brilla más tiempo. ¡Mira bien!',i4:'¡Dos destellos rápidos y una pausa larga!',i5:'¡Un coro! Dale a cada luciérnaga su ritmo. Luego ejecútalas todas.',
- h1:'Haz que la lámpara parpadee 3 veces. Cambia un número.',h2:'Esta espera más a oscuras. Mira "espera" después de "apaga".',h3:'Brilla mucho y se apaga rápido. Y ahora 2 repeticiones.',h4:'Necesitas dos "enciende" dentro de repite. Añade "enciende", "espera", "apaga", "espera".',h5:'Elige una pestaña y haz un ritmo para cada una. ¡Cualquier espectáculo vale!'},
-ID:{lang:'id',dir:'ltr',g1:'Level 1: tiru kunang-kunang pengantuk',g2:'Level 2: tiru irama Kilat',g3:'Level 3: tiru irama Detak',g4:'Level 4: tiru kilatan ganda',g5:'Level 5: paduan suara 3 kunang-kunang',a1:'Ubah angkanya',a2:'Tambah blok',a3:'Pilih kunang-kunang, buat 3 irama',wc1:'Kunang-kunang datang!',wc2:'Level {n} dari 5 selesai',nx:'Berikutnya:',bonusU:'Mini game terbuka!',bonus:'Tangkap kunang-kunang',back:'Kembali ke level',hihi:'Hihi!',jar:'Toples',cardNext:'Kunang-kunang berikutnya',cardEnd:'Final',runall:'Jalankan semua',tab:'Kunang-kunang',look:'Lihat di sini!',bh:'Klik kunang-kunang saat menyala!',d1:'Di sini kunang-kunang sudah gelap, tapi lampumu masih menyala.',d2:'Di sini kunang-kunang menyala, tapi lampumu gelap.',d3:'Kunang-kunang masih berkedip, tapi lampumu berhenti.',d4:'Kunang-kunang sudah berhenti, tapi lampumu masih berkedip.',undo:'Batal',bang:'Gangguan!',bye:'Gangguan kabur!',n1:'Ngantuk: kunang-kunang pelan',n2:'Kilat: sangat cepat',n3:'Detak: berdenyut seperti jantung',n4:'Kembar: kilat ganda',n5:'Paduan suara: tiga kunang-kunang',rep:'ulangi',tm1:'kali',tm:'kali',on:'nyalakan',off:'matikan',wait:'tunggu',run:'Jalankan',stop:'Berhenti',show:'Kunang-kunang',next:'Lanjut',again:'Main lagi',reset:'Ulang',help:'Petunjuk',snd:'Suara',up:'Naik',dn:'Turun',rm:'Hapus',go:'Ayo!',
+ i1:'¡Una luciérnaga parpadea! Haz que tu lámpara parpadee igual. Pulsa +.',i2:'Esta luciérnaga se queda más tiempo a oscuras. Cambia el último número.',i3:'Esta brilla más tiempo. Cambia el número del brillo.',i4:'Ahora hay dos números distintos. ¡Iguala a la luciérnaga!',i5:'¡Coro! Elige una luciérnaga y pon sus 3 números. Luego ejecútalas todas.',
+ h1:'Pulsa + en las repeticiones hasta que coincida con la luciérnaga.',h2:'Cambia el número del segundo "espera" hasta que coincida.',h3:'Cambia el número del primer "espera" hasta que coincida.',h4:'Cambia las repeticiones y el último "espera". Los números que parpadean hay que cambiarlos.',h5:'Elige una pestaña y cambia los números. ¡Cualquier espectáculo vale!'},
+ID:{lang:'id',dir:'ltr',a5:'Pilih kunang-kunang, atur 3 angka',a4:'Ubah dua angka',g1:'Level 1: tiru kunang-kunang pengantuk',g2:'Level 2: tiru irama Kilat',g3:'Level 3: tiru irama Detak',g4:'Level 4: tiru dua angka',g5:'Level 5: paduan suara 3 kunang-kunang',a1:'Ubah angka ulangi',a2:'Ubah jeda gelap',a3:'Ubah waktu menyala',wc1:'Kunang-kunang datang!',wc2:'Level {n} dari 5 selesai',nx:'Berikutnya:',bonusU:'Mini game terbuka!',bonus:'Tangkap kunang-kunang',back:'Kembali ke level',hihi:'Hihi!',jar:'Toples',cardNext:'Kunang-kunang berikutnya',cardEnd:'Final',runall:'Jalankan semua',tab:'Kunang-kunang',look:'Lihat di sini!',bh:'Klik kunang-kunang saat menyala!',d1:'Di sini kunang-kunang sudah gelap, tapi lampumu masih menyala.',d2:'Di sini kunang-kunang menyala, tapi lampumu gelap.',d3:'Kunang-kunang masih berkedip, tapi lampumu berhenti.',d4:'Kunang-kunang sudah berhenti, tapi lampumu masih berkedip.',undo:'Batal',bang:'Gangguan!',bye:'Gangguan kabur!',n1:'Ngantuk: kunang-kunang pelan',n2:'Kilat: sangat cepat',n3:'Detak: berdenyut seperti jantung',n4:'Pemimpi: jeda panjang',n5:'Paduan suara: tiga kunang-kunang',rep:'ulangi',tm1:'kali',tm:'kali',on:'nyalakan',off:'matikan',wait:'tunggu',run:'Jalankan',stop:'Berhenti',show:'Kunang-kunang',next:'Lanjut',again:'Main lagi',reset:'Ulang',help:'Petunjuk',snd:'Suara',up:'Naik',dn:'Turun',rm:'Hapus',go:'Ayo!',
  stopm:'Berhenti! Kamu boleh mengubah program.',resetm:'Mulai lagi. Lihat kunang-kunangnya!',miss:'Gangguan berkedip! Lihat kunang-kunangnya sekali lagi.',none:'Lampu tidak berkedip. Kamu perlu "nyalakan" dan "tunggu".',win:'Berhasil! Kunang-kunang terbang ke lampu!',winf:'Irama yang keren! Kunang-kunang menjawab!',winf2:'Kunang-kunang menjawab dengan irama kamu!',fin:'Kamu bisa bahasa kunang-kunang!',free:'Buat irama kamu dan tekan ▶. Kunang-kunang akan menjawab!',
  t1:'Lihat: kunang-kunang berkedip. Ingat iramanya!',t2:'Ini programmu. Ubah angka dengan − dan +.',t3:'Tekan ▶. Lampu akan berkedip sesuai programmu.',
- i1:'Kunang-kunang berkedip di hutan! Panggil dengan lampumu.',i2:'Kunang-kunang baru! Kedipnya beda.',i3:'Yang ini menyala lebih lama. Perhatikan!',i4:'Dua kilatan cepat dan jeda panjang!',i5:'Paduan suara! Beri tiap kunang-kunang iramanya sendiri. Lalu jalankan semua.',
- h1:'Buat lampu berkedip 3 kali. Ubah satu angka.',h2:'Yang ini menunggu lebih lama dalam gelap. Lihat "tunggu" setelah "matikan".',h3:'Menyala lama, padam cepat. Sekarang 2 kali ulang.',h4:'Perlu dua "nyalakan" di dalam ulangi. Tambah "nyalakan", "tunggu", "matikan", "tunggu".',h5:'Pilih tab, buat irama untuk tiap kunang-kunang. Pertunjukan apa pun boleh!'},
-IT:{lang:'it',dir:'ltr',g1:'Livello 1: copia la lucciola sonnolenta',g2:'Livello 2: copia il ritmo di Scatto',g3:'Livello 3: copia il ritmo di Battito',g4:'Livello 4: copia il doppio lampo',g5:'Livello 5: un coro di 3 lucciole',a1:'Cambia i numeri',a2:'Aggiungi blocchi',a3:'Scegli una lucciola: 3 ritmi',wc1:'La lucciola è arrivata!',wc2:'Livello {n} di 5 completato',nx:'Poi:',bonusU:'Minigioco sbloccato!',bonus:'Cattura le lucciole',back:'Torna ai livelli',hihi:'Hi hi!',jar:'Barattolo',cardNext:'Prossima lucciola',cardEnd:'Finale',runall:'Avvia tutte',tab:'Lucciola',look:'Guarda qui!',bh:'Clicca una lucciola mentre brilla!',d1:'Qui la lucciola è già buia, ma la tua lampada è ancora accesa.',d2:'Qui la lucciola brilla, ma la tua lampada è spenta.',d3:'La lucciola lampeggia ancora, ma la tua lampada si è fermata.',d4:'La lucciola si è fermata, ma la tua lampada continua.',undo:'Annulla',bang:'Glitch!',bye:'Il Glitch è scappato!',n1:'Sonnolento: lucciola lenta',n2:'Scatto: velocissima',n3:'Battito: pulsa come un cuore',n4:'Gemella: doppio lampo',n5:'Coro: tre lucciole',rep:'ripeti',tm1:'volta',tm:'volte',on:'accendi',off:'spegni',wait:'aspetta',run:'Avvia',stop:'Stop',show:'Lucciola',next:'Avanti',again:'Gioca ancora',reset:'Ricomincia',help:'Aiuto',snd:'Suono',up:'Su',dn:'Giù',rm:'Togli',go:'Via!',
+ i1:'Kunang-kunang berkedip! Buat lampumu berkedip sama. Tekan +.',i2:'Kunang-kunang ini lebih lama gelap. Ubah angka terakhir.',i3:'Yang ini menyala lebih lama. Ubah angka nyalanya.',i4:'Sekarang dua angka berbeda. Samakan dengan kunang-kunang!',i5:'Paduan suara! Pilih kunang-kunang dan atur 3 angkanya. Lalu jalankan semua.',
+ h1:'Tekan + pada angka ulangi sampai sama dengan kunang-kunang.',h2:'Ubah angka di "tunggu" kedua sampai sama.',h3:'Ubah angka di "tunggu" pertama sampai sama.',h4:'Ubah angka ulangi dan "tunggu" terakhir. Angka yang berkedip perlu diubah.',h5:'Pilih tab dan ubah angkanya. Pertunjukan apa pun boleh!'},
+IT:{lang:'it',dir:'ltr',a5:'Scegli una lucciola: 3 numeri',a4:'Cambia due numeri',g1:'Livello 1: copia la lucciola sonnolenta',g2:'Livello 2: copia il ritmo di Scatto',g3:'Livello 3: copia il ritmo di Battito',g4:'Livello 4: copia due numeri',g5:'Livello 5: un coro di 3 lucciole',a1:'Cambia le ripetizioni',a2:'Cambia la pausa al buio',a3:'Cambia il tempo di luce',wc1:'La lucciola è arrivata!',wc2:'Livello {n} di 5 completato',nx:'Poi:',bonusU:'Minigioco sbloccato!',bonus:'Cattura le lucciole',back:'Torna ai livelli',hihi:'Hi hi!',jar:'Barattolo',cardNext:'Prossima lucciola',cardEnd:'Finale',runall:'Avvia tutte',tab:'Lucciola',look:'Guarda qui!',bh:'Clicca una lucciola mentre brilla!',d1:'Qui la lucciola è già buia, ma la tua lampada è ancora accesa.',d2:'Qui la lucciola brilla, ma la tua lampada è spenta.',d3:'La lucciola lampeggia ancora, ma la tua lampada si è fermata.',d4:'La lucciola si è fermata, ma la tua lampada continua.',undo:'Annulla',bang:'Glitch!',bye:'Il Glitch è scappato!',n1:'Sonnolento: lucciola lenta',n2:'Scatto: velocissima',n3:'Battito: pulsa come un cuore',n4:'Sognatore: pause lunghe',n5:'Coro: tre lucciole',rep:'ripeti',tm1:'volta',tm:'volte',on:'accendi',off:'spegni',wait:'aspetta',run:'Avvia',stop:'Stop',show:'Lucciola',next:'Avanti',again:'Gioca ancora',reset:'Ricomincia',help:'Aiuto',snd:'Suono',up:'Su',dn:'Giù',rm:'Togli',go:'Via!',
  stopm:'Stop! Puoi cambiare il programma.',resetm:'Si ricomincia. Guarda la lucciola!',miss:'Il Glitch ha lampeggiato! Guarda ancora la lucciola.',none:'La lampada non ha lampeggiato. Servono "accendi" e "aspetta".',win:'Ce l\'hai fatta! La lucciola vola alla lampada!',winf:'Che ritmo! La lucciola risponde!',winf2:'Le lucciole hanno risposto col tuo ritmo!',fin:'Parli la lingua delle lucciole!',free:'Inventa il tuo ritmo e premi ▶. Le lucciole risponderanno!',
  t1:'Guarda: la lucciola lampeggia. Ricorda il ritmo!',t2:'Questo è il tuo programma. Cambia i numeri con − e +.',t3:'Premi ▶. La lampada lampeggerà come il programma.',
- i1:'Una lucciola lampeggia nel bosco! Chiamala con la tua lampada.',i2:'Una nuova lucciola! Lampeggia in modo diverso.',i3:'Questa brilla più a lungo. Guarda bene!',i4:'Due lampi veloci e una pausa lunga!',i5:'Un coro! Dai a ogni lucciola il suo ritmo. Poi avvia tutte.',
- h1:'Fai lampeggiare la lampada 3 volte. Cambia un numero.',h2:'Questa aspetta più a lungo al buio. Guarda "aspetta" dopo "spegni".',h3:'Brilla a lungo e si spegne in fretta. Ora 2 ripetizioni.',h4:'Servono due "accendi" dentro ripeti. Aggiungi "accendi", "aspetta", "spegni", "aspetta".',h5:'Scegli una scheda e crea un ritmo per ognuna. Va bene qualsiasi spettacolo!'},
-TR:{lang:'tr',dir:'ltr',g1:'Seviye 1: uykucu ateş böceğini taklit et',g2:'Seviye 2: Şimşek\'in ritmini taklit et',g3:'Seviye 3: Nabız\'ın ritmini taklit et',g4:'Seviye 4: çift parıltıyı taklit et',g5:'Seviye 5: 3 ateş böceğinden koro',a1:'Sayıları değiştir',a2:'Blok ekle',a3:'Bir ateş böceği seç, 3 ritim yap',wc1:'Ateş böceği geldi!',wc2:'Seviye {n}/5 tamam',nx:'Sıradaki:',bonusU:'Mini oyun açıldı!',bonus:'Ateş böceği yakala',back:'Seviyelere dön',hihi:'Hi hi!',jar:'Kavanoz',cardNext:'Sıradaki ateş böceği',cardEnd:'Final',runall:'Hepsini çalıştır',tab:'Ateş böceği',look:'Buraya bak!',bh:'Parlarken ateş böceğine tıkla!',d1:'Burada ateş böceği söndü ama lambanın hâlâ yanıyor.',d2:'Burada ateş böceği parlıyor ama lamban sönük.',d3:'Ateş böceği hâlâ yanıp sönüyor ama lamban durdu.',d4:'Ateş böceği durdu ama lamban hâlâ yanıp sönüyor.',undo:'Geri al',bang:'Arıza!',bye:'Arıza kaçtı!',n1:'Uykucu: yavaş ateş böceği',n2:'Şimşek: çok hızlı',n3:'Nabız: kalp gibi atar',n4:'İkiz: çift parıltı',n5:'Koro: üç ateş böceği',rep:'tekrarla',tm1:'kez',tm:'kez',on:'yak',off:'söndür',wait:'bekle',run:'Çalıştır',stop:'Dur',show:'Ateş böceği',next:'İleri',again:'Tekrar oyna',reset:'Baştan',help:'İpucu',snd:'Ses',up:'Yukarı',dn:'Aşağı',rm:'Kaldır',go:'Hadi!',
+ i1:'Una lucciola lampeggia! Fai lampeggiare uguale la tua lampada. Premi +.',i2:'Questa resta al buio più a lungo. Cambia l\'ultimo numero.',i3:'Questa brilla più a lungo. Cambia il numero della luce.',i4:'Ora due numeri sono diversi. Copia la lucciola!',i5:'Coro! Scegli una lucciola e imposta i suoi 3 numeri. Poi avvia tutte.',
+ h1:'Premi + sulle ripetizioni finché è uguale alla lucciola.',h2:'Cambia il numero del secondo "aspetta" finché coincide.',h3:'Cambia il numero del primo "aspetta" finché coincide.',h4:'Cambia le ripetizioni e l\'ultimo "aspetta". I numeri che lampeggiano vanno cambiati.',h5:'Scegli una scheda e cambia i numeri. Va bene qualsiasi spettacolo!'},
+TR:{lang:'tr',dir:'ltr',a5:'Bir ateş böceği seç, 3 sayı ayarla',a4:'İki sayıyı değiştir',g1:'Seviye 1: uykucu ateş böceğini taklit et',g2:'Seviye 2: Şimşek\'in ritmini taklit et',g3:'Seviye 3: Nabız\'ın ritmini taklit et',g4:'Seviye 4: iki sayıyı taklit et',g5:'Seviye 5: 3 ateş böceğinden koro',a1:'Tekrar sayısını değiştir',a2:'Karanlık beklemeyi değiştir',a3:'Parlama süresini değiştir',wc1:'Ateş böceği geldi!',wc2:'Seviye {n}/5 tamam',nx:'Sıradaki:',bonusU:'Mini oyun açıldı!',bonus:'Ateş böceği yakala',back:'Seviyelere dön',hihi:'Hi hi!',jar:'Kavanoz',cardNext:'Sıradaki ateş böceği',cardEnd:'Final',runall:'Hepsini çalıştır',tab:'Ateş böceği',look:'Buraya bak!',bh:'Parlarken ateş böceğine tıkla!',d1:'Burada ateş böceği söndü ama lambanın hâlâ yanıyor.',d2:'Burada ateş böceği parlıyor ama lamban sönük.',d3:'Ateş böceği hâlâ yanıp sönüyor ama lamban durdu.',d4:'Ateş böceği durdu ama lamban hâlâ yanıp sönüyor.',undo:'Geri al',bang:'Arıza!',bye:'Arıza kaçtı!',n1:'Uykucu: yavaş ateş böceği',n2:'Şimşek: çok hızlı',n3:'Nabız: kalp gibi atar',n4:'Hayalci: uzun aralar',n5:'Koro: üç ateş böceği',rep:'tekrarla',tm1:'kez',tm:'kez',on:'yak',off:'söndür',wait:'bekle',run:'Çalıştır',stop:'Dur',show:'Ateş böceği',next:'İleri',again:'Tekrar oyna',reset:'Baştan',help:'İpucu',snd:'Ses',up:'Yukarı',dn:'Aşağı',rm:'Kaldır',go:'Hadi!',
  stopm:'Dur! Programı değiştirebilirsin.',resetm:'Baştan başlıyoruz. Ateş böceğine bak!',miss:'Arıza göz kırptı! Ateş böceğine bir daha bak.',none:'Lamba yanıp sönmedi. "yak" ve "bekle" lazım.',win:'Başardın! Ateş böceği lambaya uçuyor!',winf:'Ne güzel ritim! Ateş böceği cevap veriyor!',winf2:'Ateş böcekleri senin ritminle cevap verdi!',fin:'Ateş böceklerinin dilini konuşuyorsun!',free:'Kendi ritmini bul ve ▶ tuşuna bas. Ateş böcekleri cevap verecek!',
  t1:'Bak: ateş böceği yanıp sönüyor. Ritmi aklında tut!',t2:'Bu senin programın. Sayıları − ve + ile değiştir.',t3:'▶ tuşuna bas. Lamba programını yanıp söner.',
- i1:'Ormanda bir ateş böceği yanıp sönüyor! Lambanla onu çağır.',i2:'Yeni bir ateş böceği! Başka türlü yanıp sönüyor.',i3:'Bu daha uzun parlıyor. Dikkatli bak!',i4:'İki hızlı parıltı ve uzun bir bekleme!',i5:'Koro! Her ateş böceğine kendi ritmini ver. Sonra hepsini çalıştır.',
- h1:'Lamba 3 kez yanıp sönsün. Bir sayıyı değiştir.',h2:'Bu karanlıkta daha çok bekliyor. "söndür" sonrası "bekle"ye bak.',h3:'Uzun yanıyor, çabuk sönüyor. Şimdi 2 tekrar.',h4:'Tekrarla içinde iki "yak" lazım. "yak", "bekle", "söndür", "bekle" ekle.',h5:'Bir sekme seç, her biri için ritim yap. Her gösteri olur!'},
-PL:{lang:'pl',dir:'ltr',g1:'Poziom 1: powtórz śpiocha',g2:'Poziom 2: rytm Błyska',g3:'Poziom 3: rytm Pulsa',g4:'Poziom 4: podwójny błysk',g5:'Poziom 5: chór 3 świetlików',a1:'Zmień liczby',a2:'Dodaj klocki',a3:'Wybierz świetlika, zrób 3 rytmy',wc1:'Świetlik przyleciał!',wc2:'Poziom {n} z 5 gotowy',nx:'Dalej:',bonusU:'Odblokowano minigrę!',bonus:'Złap świetliki',back:'Wróć do poziomów',hihi:'Hi hi!',jar:'Słoik',cardNext:'Następny świetlik',cardEnd:'Finał',runall:'Uruchom wszystkie',tab:'Świetlik',look:'Patrz tutaj!',bh:'Kliknij świetlika, gdy świeci!',d1:'Tu świetlik już zgasł, a twoja lampa jeszcze świeci.',d2:'Tu świetlik świeci, a twoja lampa jest ciemna.',d3:'Świetlik jeszcze mruga, a twoja lampa już stanęła.',d4:'Świetlik już skończył, a twoja lampa mruga dalej.',undo:'Cofnij',bang:'Usterka!',bye:'Usterka uciekła!',n1:'Śpioszek: powolny świetlik',n2:'Błysk: bardzo szybki',n3:'Puls: bije jak serce',n4:'Bliźniak: podwójny błysk',n5:'Chór: trzy świetliki',rep:'powtórz',tm1:'raz',tm:'razy',on:'włącz',off:'wyłącz',wait:'czekaj',run:'Uruchom',stop:'Stop',show:'Świetlik',next:'Dalej',again:'Zagraj jeszcze raz',reset:'Od nowa',help:'Podpowiedź',snd:'Dźwięk',up:'W górę',dn:'W dół',rm:'Usuń',go:'Jedziemy!',
+ i1:'Ateş böceği yanıp sönüyor! Lambanı da aynı yap. + tuşuna bas.',i2:'Bu ateş böceği karanlıkta daha uzun kalıyor. Son sayıyı değiştir.',i3:'Bu daha uzun parlıyor. Parlama sayısını değiştir.',i4:'Şimdi iki sayı farklı. Ateş böceğine uydur!',i5:'Koro! Bir ateş böceği seç, 3 sayısını ayarla. Sonra hepsini çalıştır.',
+ h1:'Tekrar sayısında + tuşuna bas, ateş böceğiyle aynı olana kadar.',h2:'İkinci "bekle" sayısını aynı olana kadar değiştir.',h3:'Birinci "bekle" sayısını aynı olana kadar değiştir.',h4:'Tekrar sayısını ve son "bekle"yi değiştir. Yanıp sönen sayılar değişmeli.',h5:'Bir sekme seç, sayıları değiştir. Her gösteri olur!'},
+PL:{lang:'pl',dir:'ltr',a5:'Wybierz świetlika, ustaw 3 liczby',a4:'Zmień dwie liczby',g1:'Poziom 1: powtórz śpiocha',g2:'Poziom 2: rytm Błyska',g3:'Poziom 3: rytm Pulsa',g4:'Poziom 4: dopasuj dwie liczby',g5:'Poziom 5: chór 3 świetlików',a1:'Zmień powtórzenia',a2:'Zmień ciemną przerwę',a3:'Zmień czas światła',wc1:'Świetlik przyleciał!',wc2:'Poziom {n} z 5 gotowy',nx:'Dalej:',bonusU:'Odblokowano minigrę!',bonus:'Złap świetliki',back:'Wróć do poziomów',hihi:'Hi hi!',jar:'Słoik',cardNext:'Następny świetlik',cardEnd:'Finał',runall:'Uruchom wszystkie',tab:'Świetlik',look:'Patrz tutaj!',bh:'Kliknij świetlika, gdy świeci!',d1:'Tu świetlik już zgasł, a twoja lampa jeszcze świeci.',d2:'Tu świetlik świeci, a twoja lampa jest ciemna.',d3:'Świetlik jeszcze mruga, a twoja lampa już stanęła.',d4:'Świetlik już skończył, a twoja lampa mruga dalej.',undo:'Cofnij',bang:'Usterka!',bye:'Usterka uciekła!',n1:'Śpioszek: powolny świetlik',n2:'Błysk: bardzo szybki',n3:'Puls: bije jak serce',n4:'Marzyciel: długie przerwy',n5:'Chór: trzy świetliki',rep:'powtórz',tm1:'raz',tm:'razy',on:'włącz',off:'wyłącz',wait:'czekaj',run:'Uruchom',stop:'Stop',show:'Świetlik',next:'Dalej',again:'Zagraj jeszcze raz',reset:'Od nowa',help:'Podpowiedź',snd:'Dźwięk',up:'W górę',dn:'W dół',rm:'Usuń',go:'Jedziemy!',
  stopm:'Stop! Możesz zmienić program.',resetm:'Od nowa. Patrz na świetlika!',miss:'Usterka mignęła! Spójrz jeszcze raz na świetlika.',none:'Lampa nie mignęła. Potrzebujesz "włącz" i "czekaj".',win:'Udało się! Świetlik leci do lampy!',winf:'Ale rytm! Świetlik odpowiada!',winf2:'Świetliki odpowiedziały twoim rytmem!',fin:'Mówisz językiem świetlików!',free:'Wymyśl swój rytm i naciśnij ▶. Świetliki odpowiedzą!',
  t1:'Patrz: świetlik mruga. Zapamiętaj rytm!',t2:'To twój program. Zmieniaj liczby przyciskami − i +.',t3:'Naciśnij ▶. Lampa zamruga według programu.',
- i1:'W lesie mruga świetlik! Przywołaj go lampą.',i2:'Nowy świetlik! Mruga inaczej.',i3:'Ten świeci dłużej. Patrz uważnie!',i4:'Dwa szybkie błyski i długa pauza!',i5:'Chór! Daj każdemu świetlikowi własny rytm. Potem uruchom wszystkie.',
- h1:'Niech lampa mignie 3 razy. Zmień jedną liczbę.',h2:'Ten dłużej czeka w ciemności. Spójrz na "czekaj" po "wyłącz".',h3:'Świeci długo, gaśnie szybko. I teraz 2 powtórzenia.',h4:'Potrzebujesz dwóch "włącz" w powtórz. Dodaj "włącz", "czekaj", "wyłącz", "czekaj".',h5:'Wybierz kartę i zrób rytm dla każdego. Każdy pokaz się liczy!'},
-PT:{lang:'pt',dir:'ltr',g1:'Nível 1: copia o pirilampo sonolento',g2:'Nível 2: copia o ritmo do Veloz',g3:'Nível 3: copia o ritmo do Pulso',g4:'Nível 4: copia o duplo clarão',g5:'Nível 5: um coro de 3 pirilampos',a1:'Muda os números',a2:'Junta blocos',a3:'Escolhe um pirilampo: 3 ritmos',wc1:'O pirilampo chegou!',wc2:'Nível {n} de 5 concluído',nx:'A seguir:',bonusU:'Minijogo desbloqueado!',bonus:'Apanha pirilampos',back:'Voltar aos níveis',hihi:'Hi hi!',jar:'Frasco',cardNext:'Próximo pirilampo',cardEnd:'Final',runall:'Executar todos',tab:'Pirilampo',look:'Olha aqui!',bh:'Clica num pirilampo enquanto brilha!',d1:'Aqui o pirilampo já está escuro, mas a tua lâmpada ainda está acesa.',d2:'Aqui o pirilampo brilha, mas a tua lâmpada está escura.',d3:'O pirilampo ainda pisca, mas a tua lâmpada parou.',d4:'O pirilampo parou, mas a tua lâmpada continua a piscar.',undo:'Desfazer',bang:'Erro!',bye:'O Erro fugiu!',n1:'Sonolento: pirilampo lento',n2:'Veloz: muito rápido',n3:'Pulso: bate como um coração',n4:'Gémeo: duplo clarão',n5:'Coro: três pirilampos',rep:'repete',tm1:'vez',tm:'vezes',on:'liga',off:'desliga',wait:'espera',run:'Executar',stop:'Parar',show:'Pirilampo',next:'Seguinte',again:'Jogar outra vez',reset:'Recomeçar',help:'Dica',snd:'Som',up:'Para cima',dn:'Para baixo',rm:'Tirar',go:'Vamos!',
+ i1:'Świetlik mruga! Niech twoja lampa mruga tak samo. Naciśnij +.',i2:'Ten świetlik dłużej siedzi w ciemności. Zmień ostatnią liczbę.',i3:'Ten świeci dłużej. Zmień liczbę światła.',i4:'Teraz dwie liczby są inne. Dopasuj do świetlika!',i5:'Chór! Wybierz świetlika i ustaw jego 3 liczby. Potem uruchom wszystkie.',
+ h1:'Naciskaj + przy powtórzeniach, aż pasuje do świetlika.',h2:'Zmień liczbę przy drugim "czekaj", aż pasuje.',h3:'Zmień liczbę przy pierwszym "czekaj", aż pasuje.',h4:'Zmień powtórzenia i ostatnie "czekaj". Mrugające liczby trzeba zmienić.',h5:'Wybierz kartę i zmieniaj liczby. Każdy pokaz się liczy!'},
+PT:{lang:'pt',dir:'ltr',a5:'Escolhe um pirilampo: 3 números',a4:'Muda dois números',g1:'Nível 1: copia o pirilampo sonolento',g2:'Nível 2: copia o ritmo do Veloz',g3:'Nível 3: copia o ritmo do Pulso',g4:'Nível 4: copia dois números',g5:'Nível 5: um coro de 3 pirilampos',a1:'Muda as repetições',a2:'Muda a pausa no escuro',a3:'Muda o tempo de luz',wc1:'O pirilampo chegou!',wc2:'Nível {n} de 5 concluído',nx:'A seguir:',bonusU:'Minijogo desbloqueado!',bonus:'Apanha pirilampos',back:'Voltar aos níveis',hihi:'Hi hi!',jar:'Frasco',cardNext:'Próximo pirilampo',cardEnd:'Final',runall:'Executar todos',tab:'Pirilampo',look:'Olha aqui!',bh:'Clica num pirilampo enquanto brilha!',d1:'Aqui o pirilampo já está escuro, mas a tua lâmpada ainda está acesa.',d2:'Aqui o pirilampo brilha, mas a tua lâmpada está escura.',d3:'O pirilampo ainda pisca, mas a tua lâmpada parou.',d4:'O pirilampo parou, mas a tua lâmpada continua a piscar.',undo:'Desfazer',bang:'Erro!',bye:'O Erro fugiu!',n1:'Sonolento: pirilampo lento',n2:'Veloz: muito rápido',n3:'Pulso: bate como um coração',n4:'Sonhador: pausas longas',n5:'Coro: três pirilampos',rep:'repete',tm1:'vez',tm:'vezes',on:'liga',off:'desliga',wait:'espera',run:'Executar',stop:'Parar',show:'Pirilampo',next:'Seguinte',again:'Jogar outra vez',reset:'Recomeçar',help:'Dica',snd:'Som',up:'Para cima',dn:'Para baixo',rm:'Tirar',go:'Vamos!',
  stopm:'Pára! Podes mudar o programa.',resetm:'Recomeçar. Olha para o pirilampo!',miss:'O Erro piscou! Olha outra vez para o pirilampo.',none:'A lâmpada não piscou. Precisas de "liga" e "espera".',win:'Conseguiste! O pirilampo voa para a lâmpada!',winf:'Que ritmo! O pirilampo responde!',winf2:'Os pirilampos responderam com o teu ritmo!',fin:'Falas a língua dos pirilampos!',free:'Inventa o teu ritmo e carrega em ▶. Os pirilampos vão responder!',
  t1:'Olha: o pirilampo está a piscar. Lembra-te do ritmo!',t2:'Este é o teu programa. Muda os números com − e +.',t3:'Carrega em ▶. A lâmpada pisca o teu programa.',
- i1:'Um pirilampo pisca na floresta! Chama-o com a tua lâmpada.',i2:'Um pirilampo novo! Pisca de outra maneira.',i3:'Este brilha mais tempo. Olha bem!',i4:'Dois clarões rápidos e uma pausa longa!',i5:'Um coro! Dá a cada pirilampo o seu ritmo. Depois executa todos.',
- h1:'Faz a lâmpada piscar 3 vezes. Muda um número.',h2:'Este espera mais no escuro. Vê o "espera" depois de "desliga".',h3:'Brilha muito e apaga depressa. E agora 2 repetições.',h4:'Precisas de dois "liga" dentro do repete. Junta "liga", "espera", "desliga", "espera".',h5:'Escolhe um separador e faz um ritmo para cada um. Qualquer espetáculo serve!'},
-AR:{lang:'ar',dir:'rtl',g1:'المستوى 1: قلّد اليراعة النعسانة',g2:'المستوى 2: قلّد إيقاع السريع',g3:'المستوى 3: قلّد إيقاع النبض',g4:'المستوى 4: قلّد الوميض المزدوج',g5:'المستوى 5: جوقة من 3 يراعات',a1:'غيّر الأرقام',a2:'أضف مكعبات',a3:'اختر يراعة واصنع 3 إيقاعات',wc1:'وصلت اليراعة!',wc2:'المستوى {n} من 5 اكتمل',nx:'التالي:',bonusU:'فُتحت لعبة صغيرة!',bonus:'اصطد اليراعات',back:'العودة إلى المستويات',hihi:'هيهي!',jar:'البرطمان',cardNext:'اليراعة التالية',cardEnd:'النهاية',runall:'شغّل الكل',tab:'يراعة',look:'انظر هنا!',bh:'اضغط على اليراعة وهي مضيئة!',d1:'هنا اليراعة مظلمة، لكن مصباحك ما زال مضيئًا.',d2:'هنا اليراعة مضيئة، لكن مصباحك مظلم.',d3:'اليراعة ما زالت تومض، لكن مصباحك توقف.',d4:'اليراعة توقفت، لكن مصباحك ما زال يومض.',undo:'تراجع',bang:'عطل!',bye:'هرب العطل!',n1:'النعسان: يراعة بطيئة',n2:'السريع: سريع جدًا',n3:'النبض: ينبض كالقلب',n4:'التوأم: وميض مزدوج',n5:'جوقة: ثلاث يراعات',rep:'كرّر',tm1:'مرة',tm:'مرات',on:'شغّل',off:'أطفئ',wait:'انتظر',run:'ابدأ',stop:'قف',show:'اليراعة',next:'التالي',again:'العب مرة أخرى',reset:'من جديد',help:'تلميح',snd:'الصوت',up:'أعلى',dn:'أسفل',rm:'احذف',go:'هيا!',
+ i1:'Um pirilampo pisca! Faz a tua lâmpada piscar igual. Carrega em +.',i2:'Este pirilampo fica mais tempo no escuro. Muda o último número.',i3:'Este brilha mais tempo. Muda o número da luz.',i4:'Agora há dois números diferentes. Iguala o pirilampo!',i5:'Coro! Escolhe um pirilampo e põe os seus 3 números. Depois executa todos.',
+ h1:'Carrega em + nas repetições até ficar igual ao pirilampo.',h2:'Muda o número do segundo "espera" até ficar igual.',h3:'Muda o número do primeiro "espera" até ficar igual.',h4:'Muda as repetições e o último "espera". Os números a piscar precisam de mudar.',h5:'Escolhe um separador e muda os números. Qualquer espetáculo serve!'},
+AR:{lang:'ar',dir:'rtl',a5:'اختر يراعة واضبط 3 أرقام',a4:'غيّر رقمين',g1:'المستوى 1: قلّد اليراعة النعسانة',g2:'المستوى 2: قلّد إيقاع السريع',g3:'المستوى 3: قلّد إيقاع النبض',g4:'المستوى 4: طابق رقمين',g5:'المستوى 5: جوقة من 3 يراعات',a1:'غيّر عدد التكرار',a2:'غيّر التوقف المظلم',a3:'غيّر زمن الإضاءة',wc1:'وصلت اليراعة!',wc2:'المستوى {n} من 5 اكتمل',nx:'التالي:',bonusU:'فُتحت لعبة صغيرة!',bonus:'اصطد اليراعات',back:'العودة إلى المستويات',hihi:'هيهي!',jar:'البرطمان',cardNext:'اليراعة التالية',cardEnd:'النهاية',runall:'شغّل الكل',tab:'يراعة',look:'انظر هنا!',bh:'اضغط على اليراعة وهي مضيئة!',d1:'هنا اليراعة مظلمة، لكن مصباحك ما زال مضيئًا.',d2:'هنا اليراعة مضيئة، لكن مصباحك مظلم.',d3:'اليراعة ما زالت تومض، لكن مصباحك توقف.',d4:'اليراعة توقفت، لكن مصباحك ما زال يومض.',undo:'تراجع',bang:'عطل!',bye:'هرب العطل!',n1:'النعسان: يراعة بطيئة',n2:'السريع: سريع جدًا',n3:'النبض: ينبض كالقلب',n4:'الحالم: توقفات طويلة',n5:'جوقة: ثلاث يراعات',rep:'كرّر',tm1:'مرة',tm:'مرات',on:'شغّل',off:'أطفئ',wait:'انتظر',run:'ابدأ',stop:'قف',show:'اليراعة',next:'التالي',again:'العب مرة أخرى',reset:'من جديد',help:'تلميح',snd:'الصوت',up:'أعلى',dn:'أسفل',rm:'احذف',go:'هيا!',
  stopm:'قف! يمكنك تغيير البرنامج.',resetm:'من جديد. انظر إلى اليراعة!',miss:'العطل ومض! انظر إلى اليراعة مرة أخرى.',none:'المصباح لم يومض. تحتاج "شغّل" و"انتظر".',win:'نجحت! اليراعة تطير إلى المصباح!',winf:'يا له من إيقاع! اليراعة تجيب!',winf2:'اليراعات أجابت بإيقاعك!',fin:'أنت تتكلم لغة اليراعات!',free:'اخترع إيقاعك واضغط ▶. اليراعات ستجيب!',
  t1:'انظر: اليراعة تومض. تذكّر الإيقاع!',t2:'هذا برنامجك. غيّر الأرقام بالزرين − و+.',t3:'اضغط ▶. المصباح سيومض حسب برنامجك.',
- i1:'يراعة تومض في الغابة! ناده بمصباحك.',i2:'يراعة جديدة! تومض بطريقة أخرى.',i3:'هذه تضيء أطول. انتبه جيدًا!',i4:'وميضان سريعان وتوقف طويل!',i5:'جوقة! أعطِ كل يراعة إيقاعها. ثم شغّل الكل.',
- h1:'اجعل المصباح يومض 3 مرات. غيّر رقمًا واحدًا.',h2:'هذه تنتظر أطول في الظلام. انظر إلى "انتظر" بعد "أطفئ".',h3:'تضيء طويلًا وتنطفئ بسرعة. والآن مرّتان.',h4:'تحتاج "شغّل" مرتين داخل كرّر. أضف "شغّل" و"انتظر" و"أطفئ" و"انتظر".',h5:'اختر تبويبًا واصنع إيقاعًا لكل واحدة. أي عرض يصلح!'}
+ i1:'اليراعة تومض! اجعل مصباحك يومض مثلها. اضغط +.',i2:'هذه اليراعة تبقى في الظلام أطول. غيّر الرقم الأخير.',i3:'هذه تضيء أطول. غيّر رقم الإضاءة.',i4:'الآن رقمان مختلفان. طابق اليراعة!',i5:'جوقة! اختر يراعة واضبط أرقامها الثلاثة. ثم شغّل الكل.',
+ h1:'اضغط + على عدد التكرار حتى يطابق اليراعة.',h2:'غيّر رقم «انتظر» الثاني حتى يطابق.',h3:'غيّر رقم «انتظر» الأول حتى يطابق.',h4:'غيّر التكرار و«انتظر» الأخير. الأرقام الوامضة تحتاج تغييرًا.',h5:'اختر تبويبًا وغيّر الأرقام. أي عرض يصلح!'}
 };
 </script>
 <script>
@@ -433,15 +452,15 @@ function P(rep){var a=[].slice.call(arguments,1);return{rep:rep,body:a.map(funct
 var LV=[
  {target:P(3,'on',1,'off',1),start:P(2,'on',1,'off',1),hue:75,home:[.2,.36],m:'sleepy'},
  {target:P(3,'on',1,'off',2),start:P(3,'on',1,'off',1),hue:35,home:[.31,.27],m:'zip'},
- {target:P(2,'on',2,'off',1),start:P(3,'on',1,'off',2),hue:175,home:[.13,.46],m:'heart'},
- {target:P(2,'on',1,'off',1,'on',1,'off',3),start:P(2,'on',1,'off',1),hue:305,home:[.36,.4],m:'twin'},
+ {target:P(3,'on',2,'off',1),start:P(3,'on',1,'off',1),hue:175,home:[.13,.46],m:'heart'},
+ {target:P(2,'on',1,'off',3),start:P(3,'on',1,'off',1),hue:305,home:[.36,.4],m:'twin'},
  {chorus:true,hue:60,home:[.17,.36],m:'dance'}
 ];
 var lvl=0,prog=null,busy=false,run=null,sndOn=false,actx=null,finale=false,finK=0,misses=0,tourStep=-1;
 var colls=[],bgf=[];
 var done=[false,false,false,false,false],wins=0,cur=0,progs=null,chorusMode=false,cardState=null,tourDone=false,bonusUnlocked=false,bonusOpen=false,lvTok=0,hintOn=false;
 var CH_HUE=[60,185,305],RING=[0,2,4,6,8,9],homesC=[[.17,.36],[.33,.26],[.12,.5]];
-var CH_START=[P(3,'on',.5,'off',.5),P(2,'on',1,'off',2),P(2,'on',2,'off',1)];var RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
+var CH_START=[P(3,'on',1,'off',1),P(2,'on',1,'off',2),P(2,'on',2,'off',1)];var RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
 var T=window.T;var LANGS=['RU','EN','ES','ID','IT','TR','PL','PT','AR'];var lang='EN';
 function t(k){return(T[lang]&&T[lang][k])||T.EN[k]||k}
 var lastSay=null;
@@ -509,7 +528,7 @@ var SW=520,SH=550;
 function place(el,x,y){el.style.left=x+'px';el.style.top=y+'px'}
 function layout(){
   SW=scene.clientWidth;SH=scene.clientHeight;
-  var land=wrap.className==='land';
+  var land=wrap.classList.contains('land');
   var lx=SW*.76,ly=SH*(land?.63:.6);
   place($('#lampbox'),lx,ly);
   place($('#spark'),SW*.26,SH*(land?.6:.58));
@@ -522,46 +541,45 @@ var flying=false,wx=0,wy=0;
 function homeWild(){if(LV[lvl].chorus){wilds.forEach(function(w,i){place(w,SW*homesC[i][0],SH*homesC[i][1])});return}var h=LV[lvl].home;wx=SW*h[0];wy=SH*h[1];place(wilds[0],wx,wy)}
 function lampPos(){var l=$('#lampbox');return[parseFloat(l.style.left),parseFloat(l.style.top)-34]}
 function fit(){
-  var de=document.documentElement,bh=$('#langBar').offsetHeight,vw=de.clientWidth,vh=de.clientHeight-bh,land=vw/vh>=1.05,W=land?1000:420,H=land?560:890,s=land?Math.min(vw/W,vh/H):vw/W;
-  wrap.className=land?'land':'port';document.body.className=(land?'':'port')+(finale?'':'');
+  var de=document.documentElement,bh=$('#langBar').offsetHeight,vw=de.clientWidth,vh=de.clientHeight-bh,land=vw/vh>=1.05,W=land?1000:420,H=land?560:920,s=land?Math.min(vw/W,vh/H):vw/W;
+  wrap.classList.toggle('land',land);wrap.classList.toggle('port',!land);document.body.className=(land?'':'port')+(finale?'':'');
   wrap.style.transform='scale('+s+')';holder.style.width=Math.floor(W*s)+'px';holder.style.height=Math.floor(H*s)+'px';
   wrap.dataset.s=s;layout();
 }
 
 /* ---------- program model ---------- */
 function clone(p){return JSON.parse(JSON.stringify(p))}
-function wstep(){return lvl===4?.5:1}
+function wstep(){return 1}
 function fmt(n){return String(n).replace('.',',')}
 function lua(p){
   var s='for i = 1, '+p.rep+' do ';
   p.body.forEach(function(x){s+=x.t==='on'?'redstone.setOutput("front", true) ':x.t==='off'?'redstone.setOutput("front", false) ':'sleep('+x.n+') '});
   return s+'end'}
 function razw(n){if(lang==='RU')return n===1||n===5?'раз':'раза';return n===1?t('tm1'):t('tm')}
+function numCtl(k,v,min,max,tg){
+  var hint;
+  if(tg!==undefined){var ok=tg===v;hint='<div class="hint '+(ok?'ok':'bad')+'"><i class="fd"></i><span>'+(k==='rep'?'\u00d7':'')+fmt(tg)+'</span><svg class="ic"><use href="#'+(ok?'i-ok':(v<tg?'i-ar-up':'i-ar-dn'))+'"/></svg></div>'}
+  else hint='<div class="hint empty">.</div>';
+  return '<div class="num" data-k="'+k+'">'+hint+'<span class="st"><button class="big" data-act="'+k+'dec"'+(v<=min?' disabled':'')+'>\u2212</button><b>'+fmt(v)+'</b><button class="big" data-act="'+k+'inc"'+(v>=max?' disabled':'')+'>+</button></span></div>'}
 function render(){
-  var h='';
-  $('#repst').innerHTML='<button class="mini" data-act="rdec"'+(prog.rep<=1?' disabled':'')+'>−</button><b>'+prog.rep+'</b><button class="mini" data-act="rinc"'+(prog.rep>=5?' disabled':'')+'>+</button>';
-  $('#razt').textContent=razw(prog.rep);
-  prog.body.forEach(function(x,i){
-    var up='<button class="mini" data-act="up" data-i="'+i+'"'+(i===0?' disabled':'')+' aria-label="'+t('up')+'"><svg class="ic"><use href="#i-up"/></svg></button>',
-        dn='<button class="mini" data-act="dn" data-i="'+i+'"'+(i===prog.body.length-1?' disabled':'')+' aria-label="'+t('dn')+'"><svg class="ic"><use href="#i-down"/></svg></button>',
-        rm='<button class="mini x" data-act="rm" data-i="'+i+'" aria-label="'+t('rm')+'"><svg class="ic"><use href="#i-x"/></svg></button>';
-    if(x.t==='wait')h+='<div class="tile wait" data-i="'+i+'"><svg class="ic"><use href="#i-wait"/></svg><span class="lbl">'+t('wait')+'</span><span class="st"><button class="mini" data-act="wdec" data-i="'+i+'"'+(x.n<=wstep()?' disabled':'')+'>−</button><b>'+fmt(x.n)+'</b><button class="mini" data-act="winc" data-i="'+i+'"'+(x.n>=3?' disabled':'')+'>+</button></span><span class="sp"></span>'+up+dn+rm+'</div>';
-    else h+='<div class="tile '+x.t+'" data-i="'+i+'"><svg class="ic"><use href="#i-'+x.t+'"/></svg><span class="lbl">'+t(x.t)+'</span><span class="sp"></span>'+up+dn+rm+'</div>'});
-  $('#body').innerHTML=h;
+  var L=LV[lvl],tg=L&&L.target,bd=prog.body,a=bd[1].n,b=bd[3].n;
+  var ic=function(n){return '<svg class="ic"><use href="#i-'+n+'"/></svg>'};
+  var h='<div class="prow rrep" data-i="-1" style="--h:'+(L?L.hue:60)+'">'+ic('loop')+'<span class="lbl">'+t('rep')+'</span>'+numCtl('rep',prog.rep,1,5,tg?tg.rep:undefined)+'<span class="lbl">'+razw(prog.rep)+'</span></div>'+
+   '<div class="prow on" data-i="0">'+ic('on')+'<span class="lbl">'+t('on')+'</span></div>'+
+   '<div class="prow wait" data-i="1" style="--h:'+(L?L.hue:60)+'">'+ic('wait')+'<span class="lbl">'+t('wait')+'</span>'+numCtl('a',a,1,3,tg?tg.body[1].n:undefined)+'</div>'+
+   '<div class="prow off" data-i="2">'+ic('off')+'<span class="lbl">'+t('off')+'</span></div>'+
+   '<div class="prow wait" data-i="3" style="--h:'+(L?L.hue:60)+'">'+ic('wait')+'<span class="lbl">'+t('wait')+'</span>'+numCtl('b',b,1,3,tg?tg.body[3].n:undefined)+'</div>';
+  $('#prog').innerHTML=h;
   $('#luat').textContent=lua(prog);
-  document.querySelectorAll('#pal [data-add]').forEach(function(b){b.disabled=prog.body.length>=10});
   renderStrips();
 }
 function onAct(e){
-  var b=e.target.closest('[data-act]');if(!b||busy||b.disabled)return;var nw=performance.now();if(nw-lastAct<170)return;lastAct=nw;
-  var a=b.dataset.act,i=+b.dataset.i;if(run)stopRun();clearPoint();
-  if(a==='rdec')prog.rep=Math.max(1,prog.rep-1);
-  else if(a==='rinc')prog.rep=Math.min(5,prog.rep+1);
-  else if(a==='wdec')prog.body[i].n=Math.max(wstep(),prog.body[i].n-wstep());
-  else if(a==='winc')prog.body[i].n=Math.min(3,prog.body[i].n+wstep());
-  else if(a==='rm'){lastRm={i:i,tile:prog.body.splice(i,1)[0]};showUndo()}
-  else if(a==='up'&&i>0){var t=prog.body[i];prog.body[i]=prog.body[i-1];prog.body[i-1]=t}
-  else if(a==='dn'&&i<prog.body.length-1){var t2=prog.body[i];prog.body[i]=prog.body[i+1];prog.body[i+1]=t2}
+  var b=e.target.closest('[data-act]');if(!b||busy||b.disabled)return;
+  var nw=performance.now();if(nw-lastAct<170)return;lastAct=nw;
+  var a=b.dataset.act,bd=prog.body;if(run)stopRun();clearPoint();
+  if(a==='repdec')prog.rep=Math.max(1,prog.rep-1);else if(a==='repinc')prog.rep=Math.min(5,prog.rep+1);
+  else if(a==='adec')bd[1].n=Math.max(1,bd[1].n-1);else if(a==='ainc')bd[1].n=Math.min(3,bd[1].n+1);
+  else if(a==='bdec')bd[3].n=Math.max(1,bd[3].n-1);else if(a==='binc')bd[3].n=Math.min(3,bd[3].n+1);
   blip(330,.05);render()}
 
 /* ---------- timeline ---------- */
@@ -580,7 +598,7 @@ function same(a,b){if(a.length!==b.length)return false;for(var i=0;i<a.length;i+
 /* ---------- run / playback ---------- */
 function setLamp(on){$('#lamp').classList.toggle('on',on);$('#dust').classList.toggle('on',on)}
 function setWild(on){wilds[0].classList.toggle('on',on)}
-function hiTile(i){document.querySelectorAll('.tile.run').forEach(function(n){n.classList.remove('run')});if(i>=0){var n=document.querySelector('.tile[data-i="'+i+'"]');if(n)n.classList.add('run')}}
+function hiTile(i){document.querySelectorAll('.prow.run').forEach(function(n){n.classList.remove('run')});if(i>=0){var n=document.querySelector('.prow[data-i="'+i+'"]');if(n)n.classList.add('run')}}
 function setRunBtn(){var r=$('#run');var on=run&&(run.kind==='lamp'||run.kind==='chorus');r.classList.toggle('stop',!!on);r.innerHTML=on?'<svg class="ic"><use href="#i-stop"/></svg>'+t('stop'):'<svg class="ic"><use href="#i-play"/></svg>'+t(chorusMode?'runall':'run')}
 function stopRun(){if(run){cancelAnimationFrame(run.raf);run=null}setLamp(false);wilds.forEach(function(w){w.classList.remove('on')});hiTile(-1);setRunBtn();clearHl()}
 function startRun(kind,p,done){
@@ -634,11 +652,7 @@ function pointAt(sel){
 function clearPoint(){if(tourStep>=0&&!hintOn)return;hintOn=false;$('#arrow').style.display='none';document.querySelectorAll('.spot').forEach(function(n){n.classList.remove('spot')})}
 function stuckHint(){
   if(busy||finale||cardState||!LV[lvl].target||misses<3)return;if(run){setTimeout(stuckHint,1200);return}
-  var tg=LV[lvl].target,sel='#run',i;
-  if(prog.rep!==tg.rep)sel='#repst';
-  else{for(i=0;i<tg.body.length;i++){var x=prog.body[i],y=tg.body[i];if(!x||x.t!==y.t||x.n!==y.n){sel=x?'.tile[data-i="'+i+'"]':'#pal [data-add="'+y.t+'"]';break}}
-    if(sel==='#run'&&prog.body.length>tg.body.length)sel='.tile[data-i="'+tg.body.length+'"]'}
-  pointAt(sel);say('look')}
+  if(pointMismatch())say('look')}
 
 /* ---------- win / levels ---------- */
 function wait(ms){return new Promise(function(r){setTimeout(r,ms)})}
@@ -686,7 +700,7 @@ function say(k,mood,btn){
 function firstUndone(){var i=done.indexOf(false);return i<0?4:i}
 function pips(){var h='',fu=firstUndone(),i;for(i=0;i<5;i++){var cls='pip'+(done[i]?' done':'')+(i===lvl?' cur':'')+(i>fu?' lock':'');h+='<button class="'+cls+'" data-lv="'+i+'" style="--h:'+LV[i].hue+'"'+(i>fu?' disabled':'')+'>'+(done[i]?'\u2713':i+1)+'</button>'}$('#hud').innerHTML=h}
 function tabs(){var h='',i;for(i=0;i<3;i++)h+='<button class="tab'+(i===cur?' on':'')+'" data-tab="'+i+'" style="--h:'+CH_HUE[i]+'"><i></i>'+(i+1)+'</button>';$('#tabs').innerHTML=h;wilds.forEach(function(w,i){w.classList.toggle('sel',chorusMode&&i===cur)})}
-function bannerHtml(n){return '<b>'+(n+1)+'. '+t('n'+(n+1))+'</b><span>'+t(n===3?'a2':n===4?'a3':'a1')+'</span>'}
+function bannerHtml(n){return '<b>'+(n+1)+'. '+t('n'+(n+1))+'</b><span>'+t('a'+(n+1))+'</span>'}
 function startBanner(n,cb){bn._n=n;bn.innerHTML=bannerHtml(n);bn.classList.add('show');clearTimeout(bn._t);bn._cb=cb;bn._t=setTimeout(hideBanner,2000)}
 function hideBanner(){clearTimeout(bn._t);bn.classList.remove('show');var cb=bn._cb;bn._cb=null;if(cb)cb()}
 function closeBanner(){clearTimeout(bn._t);bn._cb=null;bn.classList.remove('show')}
@@ -701,7 +715,7 @@ function loadLevel(n){hideUndo();
   ['spark','helper'].forEach(function(id){$('#'+id).classList.remove('cheer','flip','oops')});
   nameChip();pips();tabs();render();setRunBtn();say('i'+(n+1));
   var tok=++lvTok;
-  startBanner(n,function(){if(tok!==lvTok||lvl!==n)return;if(n===0&&!tourDone){tourDone=true;startTour()}else if(!ch&&!busy&&!run)showWild()})}
+  startBanner(n,function(){if(tok!==lvTok||lvl!==n)return;if(!ch&&!busy&&!run)showWild();if(n===0)pointMismatch()})}
 function startFinale(){
   finale=true;stopRun();$('#wrap').classList.add('fin');$('#beacon').classList.add('lit');finK=0;setLamp(true);ring(9);[0,350,700,1050].forEach(function(d,i){setTimeout(function(){if(finale){var x=SW*(.25+.17*i),y=SH*(.2+.08*(i%2));boom(x,y);salute(x,y,[60,180,300,30][i])}},d)});
   say('fin','cheer');cheer();jingle();fanfare=performance.now()}
@@ -732,25 +746,15 @@ function ambient(now){
   requestAnimationFrame(ambient)}
 
 /* ---------- tour / help ---------- */
-var TOUR=[
- {sel:'#wild',text:'t1',act:function(){showWild()},pos:'top'},
- {sel:'#repst',text:'t2',pos:'top'},
- {sel:'#run',text:'t3',pos:'top',last:true}
-];
-function startTour(){tourStep=0;tourShow()}
-function tourShow(){
-  var s=TOUR[tourStep];if(!s){endTour();return}
-  say(s.text,'',{label:s.last?'go':'next',fn:function(){tourStep++;if(tourStep>=TOUR.length)endTour();else tourShow()}});
-  var el=document.querySelector(s.sel),r=el.getBoundingClientRect(),wr=wrap.getBoundingClientRect(),k=+wrap.dataset.s||1;
-  var ar=$('#arrow');ar.style.display='block';ar.style.left=((r.left-wr.left)/k+r.width/2/k-14)+'px';ar.style.top=((r.top-wr.top)/k-40)+'px';
-  document.querySelectorAll('.spot').forEach(function(n){n.classList.remove('spot')});
-  if(s.sel!=='#wild')el.classList.add('spot');
-  if(s.act)s.act()}
-function endTour(){if(tourStep<0)return;tourStep=-1;$('#arrow').style.display='none';document.querySelectorAll('.spot').forEach(function(n){n.classList.remove('spot')});say('i'+(lvl+1))}
+function startTour(){pointMismatch()}
+function endTour(){}
+function pointMismatch(){
+  var tg=LV[lvl].target;if(!tg)return false;var k=null;
+  if(prog.rep!==tg.rep)k='rep';else if(prog.body[1].n!==tg.body[1].n)k='a';else if(prog.body[3].n!==tg.body[3].n)k='b';
+  if(!k)return false;pointAt('[data-k="'+k+'"] .st');return true}
 function onHelp(){
   if(busy||finale||cardState)return;$('#btnHelp').classList.remove('pulse');
-  if(lvl===0){startTour();return}
-  say('h'+(lvl+1))}
+  say('h'+(lvl+1));pointMismatch()}
 
 /* ---------- sound ---------- */
 function blip(f,d,type){if(!sndOn||!actx)return;try{var o=actx.createOscillator(),g=actx.createGain();o.type=type||'triangle';o.frequency.value=f;g.gain.value=.08;g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+d);o.connect(g);g.connect(actx.destination);o.start();o.stop(actx.currentTime+d)}catch(e){}}
@@ -782,7 +786,7 @@ function boom(x,y,strong){
   flashEl.style.opacity='';if(!RM)flashEl.classList.add('go');
   if(!RM){var sc=$('#scene');sc.classList.remove('shake');void sc.offsetWidth;sc.classList.add('shake')}}
 function salute(x,y,hue){burst(x,y,30,hue);[[-50,-30,160],[50,-40,300],[0,-70,60]].forEach(function(o,i){setTimeout(function(){burst(x+o[0],y+o[1],20,(hue+o[2])%360)},180+i*200)})}
-function glitchPos(){return[SW*.5+SW*.08,SH*(wrap.className==='land'?.64:.62)]}
+function glitchPos(){return[SW*.5+SW*.08,SH*(wrap.classList.contains('land')?.64:.62)]}
 async function glitchBite(){
   var g=gl,lp=$('#lampbox'),lx=parseFloat(lp.style.left),ly=parseFloat(lp.style.top)-30,sp=glitchPos(),sx=sp[0],sy=sp[1];
   place(g,sx,sy);g.style.opacity=1;g.style.scale=.3;
@@ -815,12 +819,10 @@ setInterval(function(){if(RM||document.hidden||finale)return;var e=document.crea
 
 
 var lastAct=0,lastRm=null,undoT=0,stripCells={T:[],M:[]},hlEl={T:null,M:null};
-function showUndo(){var u=$('#undo');u.hidden=false;clearTimeout(undoT);undoT=setTimeout(hideUndo,6000)}
-function hideUndo(){$('#undo').hidden=true;lastRm=null;clearTimeout(undoT)}
-$('#undo').addEventListener('click',function(){if(!lastRm||busy)return;prog.body.splice(lastRm.i,0,lastRm.tile);lastRm=null;hideUndo();render()});
+function hideUndo(){}
 function units(p){var b=build(p),n=Math.round(b.total*2),a=[],k;for(k=0;k<n;k++)a.push(stateAt(b.ev,k*.5));return a}
 function drawStrip(sel,key,p,color){
-  var row=$(sel),a=units(p),rep=p.rep,L=rep?Math.round(a.length/rep):0,land=wrap.className==='land',avail=land?340:275,
+  var row=$(sel),a=units(p),rep=p.rep,L=rep?Math.round(a.length/rep):0,land=wrap.classList.contains('land'),avail=land?340:275,
       cw=Math.max(2,Math.min(26,(avail-(rep-1)*6)/Math.max(1,a.length))),h='',r,k;
   for(r=0;r<rep;r++){h+='<div class="sg">';for(k=r*L;k<(r+1)*L;k++){var c='sc'+(a[k]?' on':'')+(k===r*L?' first':'')+(k===(r+1)*L-1?' last':'')+(k>r*L&&a[k]!==a[k-1]?' chg':'')+(k%2?' bt':'');h+='<i class="'+c+'" style="width:'+cw+'px"></i>'}h+='</div>'}
   var sc=row.querySelector('.scells');sc.innerHTML=h;row.style.setProperty('--c',color);row.querySelector('.sx').textContent='\u00d7'+rep;
@@ -880,8 +882,6 @@ $('#lamp').innerHTML=lampSvg();$('#helper').innerHTML=helperSvg();$('#spark').in
 $('#capface').className='face spark';$('#capface').innerHTML=sparkSvg();$('#finspark').innerHTML=sparkSvg();
 $('#finspark').className='big spark cheer';
 document.addEventListener('click',onAct);
-$('#pal').addEventListener('click',function(e){var b=e.target.closest('[data-add]');if(b&&!busy&&!b.disabled){var nw=performance.now();if(nw-lastAct<170)return;lastAct=nw;if(run)stopRun();clearPoint();var t=b.dataset.add;prog.body.push(t==='wait'?{t:'wait',n:1}:{t:t});blip(440,.05);render();var bd=$('#body');bd.scrollTop=bd.scrollHeight}});
-$('#reset').addEventListener('click',function(){if(busy||finale)return;stopRun();clearPoint();if(chorusMode){progs[cur]=clone(CH_START[cur]);prog=progs[cur]}else prog=clone(LV[lvl].start);render();say('resetm')});
 $('#run').addEventListener('click',onRun);$('#show').addEventListener('click',onShow);
 $('#next').addEventListener('click',function(){loadLevel(lvl+1)});
 $('#again').addEventListener('click',again);
