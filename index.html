@@ -168,6 +168,45 @@ button:focus-visible{outline:4px solid #fff;outline-offset:2px}
 .port #cap{font-size:15px;min-height:64px;padding-left:56px}
 .port #cap .face{width:40px;height:44px}
 .port #lampbox{transform:translate(-50%,-62%) scale(.8)}
+
+#glitch{width:66px;height:55px;transform:translate(-50%,-60%);pointer-events:none;opacity:0;z-index:4}
+#glitch svg{width:100%;height:100%;display:block;overflow:visible;shape-rendering:crispEdges;filter:drop-shadow(2px 0 0 #000) drop-shadow(-2px 0 0 #000) drop-shadow(0 2px 0 #000) drop-shadow(0 -2px 0 #000) drop-shadow(0 0 9px #b46bff);animation:jit .25s steps(2) infinite}
+@keyframes jit{25%{transform:translate(-2px,1px)}50%{transform:translate(2px,-1px)}75%{transform:translate(1px,2px)}}
+#bang{display:none;z-index:9;pointer-events:none;min-width:120px;height:92px;transform:translate(-50%,-50%);align-items:center;justify-content:center;text-align:center;font-weight:900;font-size:22px;line-height:1;color:#fff;-webkit-text-stroke:0;text-shadow:2px 2px 0 #000,-2px 2px 0 #000,2px -2px 0 #000,-2px -2px 0 #000,0 3px 0 #000;padding:0 18px}
+#bang.show{display:flex;animation:bangp .95s ease-out forwards}
+#bang::before{content:"";position:absolute;inset:0;z-index:-1;background:#8e44ff;clip-path:var(--star);filter:drop-shadow(0 0 0 #000)}
+#bang.good::before{background:#3ddc84}
+#bang::after{content:"";position:absolute;inset:6px;z-index:-1;background:#ffd23f;clip-path:var(--star);opacity:.9}
+@keyframes bangp{0%{transform:translate(-50%,-50%) scale(.2) rotate(-12deg);opacity:0}15%{transform:translate(-50%,-50%) scale(1.15) rotate(4deg);opacity:1}30%{transform:translate(-50%,-50%) scale(1) rotate(-3deg)}85%{opacity:1}100%{transform:translate(-50%,-50%) scale(1.05) rotate(0);opacity:0}}
+#boom{inset:0;z-index:7;pointer-events:none;opacity:0;background:repeating-conic-gradient(from 0deg at var(--bx,50%) var(--by,60%),rgba(255,246,170,.95) 0 5deg,transparent 5deg 14deg);-webkit-mask-image:radial-gradient(circle at var(--bx,50%) var(--by,60%),#000 0,#000 8%,transparent 60%);mask-image:radial-gradient(circle at var(--bx,50%) var(--by,60%),#000 0,#000 8%,transparent 60%)}
+#boom.go{animation:boom .8s ease-out}
+@keyframes boom{0%{opacity:1;transform:scale(.4);transform-origin:var(--bx) var(--by)}100%{opacity:0;transform:scale(1.7);transform-origin:var(--bx) var(--by)}}
+#flash{inset:0;z-index:8;pointer-events:none;background:#fff;opacity:0}
+#flash.go{animation:fl .35s ease-out}
+@keyframes fl{0%{opacity:.55}100%{opacity:0}}
+.pt{position:absolute;width:7px;height:7px;pointer-events:none;z-index:7;background:hsl(var(--h,50) 100% 66%);box-shadow:0 0 8px hsl(var(--h,50) 100% 60%)}
+.pt.deb{box-shadow:none;border:1.5px solid #000;width:6px;height:6px}
+.star{position:absolute;z-index:1;width:70px;height:2px;background:linear-gradient(90deg,transparent,#fff);transform:rotate(30deg);pointer-events:none;animation:star .9s linear forwards}
+@keyframes star{0%{opacity:0;translate:0 0}15%{opacity:1}100%{opacity:0;translate:-170px 100px}}
+#scene.shake{animation:shk .45s}
+@keyframes shk{0%,100%{transform:translate(0,0)}20%{transform:translate(-4px,2px)}40%{transform:translate(4px,-3px)}60%{transform:translate(-3px,-2px)}80%{transform:translate(3px,2px)}}
+#spark.flip svg{animation:flip .9s ease-in-out}
+@keyframes flip{to{transform:rotate(360deg)}}
+#helper .hf2{display:none}
+#helper.cheer .hf1{display:none}
+#helper.cheer .hf2{display:inline}
+#helper.tap svg{animation:tap .2s ease-out}
+@keyframes tap{50%{transform:translateY(-7px) scale(1.07);filter:brightness(1.7)}}
+.tile.run{animation:tpl .33s ease-in-out infinite alternate}
+@keyframes tpl{to{transform:scale(1.035)}}
+.sig{position:absolute;z-index:3;width:18px;height:11px;border-radius:5px;background:#ff5a4a;border:2px solid #fff3;box-shadow:0 0 12px 5px rgba(255,70,50,.95);pointer-events:none;transform:translate(0,-50%)}
+#fname{left:8px;top:40px;z-index:5;background:#ffeeb0;border:3px solid #000;border-left-width:10px;border-radius:6px;padding:2px 8px;font-size:12px;font-weight:900;line-height:1.2;max-width:62%;pointer-events:none}
+.fin #fname{display:none}
+#lamp.bite{animation:bite .5s steps(3)}
+@keyframes bite{0%{filter:none}30%{transform:translateX(-3px) rotate(-3deg);filter:hue-rotate(250deg) brightness(1.6)}60%{transform:translateX(3px) rotate(3deg);filter:brightness(.4)}100%{transform:none;filter:none}}
+#beacon .lamp.lt{fill:#ffd24a;filter:drop-shadow(0 0 5px #ffb300)}
+.fly.bgf{opacity:.8;scale:.55}
+@media (prefers-reduced-motion:reduce){#spark,.twk,.fly .w,#glitch svg,.tile.run{animation:none!important}#scene.shake{animation:none}#boom{display:none}}
 </style>
 </head>
 <body>
@@ -237,47 +276,47 @@ button:focus-visible{outline:4px solid #fff;outline-offset:2px}
 
 <script>
 window.T={
-RU:{lang:'ru',dir:'ltr',rep:'повтори',tm1:'раз',tm:'раза',on:'включи',off:'выключи',wait:'подожди',run:'Запустить',stop:'Стоп',show:'Светлячок',next:'Дальше',again:'Сыграть ещё',reset:'Сначала',help:'Подсказка',snd:'Звук',up:'Вверх',dn:'Вниз',rm:'Убрать',go:'Поехали',
+RU:{lang:'ru',dir:'ltr',bang:'Сбой!',bye:'Сбой отступил!',n1:'Соня: сонный светлячок',n2:'Шустрик: очень быстрый',n3:'Пульс: бьётся как сердце',n4:'Двойняшка: две вспышки',n5:'Эхо: повторяет тебя',rep:'повтори',tm1:'раз',tm:'раза',on:'включи',off:'выключи',wait:'подожди',run:'Запустить',stop:'Стоп',show:'Светлячок',next:'Дальше',again:'Сыграть ещё',reset:'Сначала',help:'Подсказка',snd:'Звук',up:'Вверх',dn:'Вниз',rm:'Убрать',go:'Поехали',
  stopm:'Стоп! Можно поменять программу.',resetm:'Программа сначала. Смотри на светлячка!',miss:'Сбой мигнул! Посмотри на светлячка ещё раз.',none:'Лампа не мигнула. Нужны «включи» и «подожди».',win:'Получилось! Светлячок летит к лампе!',winf:'Какой ритм! Смотри, светлячок отвечает!',winf2:'Светлячки ответили твоим ритмом!',fin:'Ты говоришь на языке светлячков!',free:'Придумай свой ритм и нажми ▶. Светлячки ответят!',
  t1:'Смотри: светлячок мигает. Запомни ритм!',t2:'Это твоя программа. Меняй числа кнопками − и +.',t3:'Нажми ▶. Лампа мигнёт по программе.',
  i1:'В чаще мигает светлячок! Позови его своей лампой.',i2:'Новый светлячок! Он мигает по-другому.',i3:'Этот светит подольше. Смотри внимательно!',i4:'Две быстрые вспышки и долгая пауза!',i5:'Придумай свой ритм. Светлячки ответят!',
  h1:'Пусть лампа мигнёт 3 раза. Поменяй одно число.',h2:'Этот ждёт в темноте дольше. Смотри на «подожди» после «выключи».',h3:'Светит долго, гаснет быстро. И повторов теперь 2.',h4:'Нужно два «включи» внутри повтора. Добавь «включи», «подожди», «выключи», «подожди».',h5:'Любой ритм подойдёт. Попробуй «подожди» 0,5.'},
-EN:{lang:'en',dir:'ltr',rep:'repeat',tm1:'time',tm:'times',on:'on',off:'off',wait:'wait',run:'Run',stop:'Stop',show:'Firefly',next:'Next',again:'Play again',reset:'Start over',help:'Hint',snd:'Sound',up:'Up',dn:'Down',rm:'Remove',go:"Let's go",
+EN:{lang:'en',dir:'ltr',bang:'Glitch!',bye:'Glitch ran away!',n1:'Sleepy: a slow firefly',n2:'Zippy: super fast',n3:'Pulse: beats like a heart',n4:'Twin: double flash',n5:'Echo: repeats you',rep:'repeat',tm1:'time',tm:'times',on:'on',off:'off',wait:'wait',run:'Run',stop:'Stop',show:'Firefly',next:'Next',again:'Play again',reset:'Start over',help:'Hint',snd:'Sound',up:'Up',dn:'Down',rm:'Remove',go:"Let's go",
  stopm:'Stop! You can change the program.',resetm:'Fresh start. Watch the firefly!',miss:'The Glitch blinked! Watch the firefly again.',none:'The lamp did not blink. You need "on" and "wait".',win:'You did it! The firefly flies to the lamp!',winf:'What a rhythm! The firefly answers!',winf2:'The fireflies answered with your rhythm!',fin:'You speak the language of fireflies!',free:'Make up your rhythm and press ▶. The fireflies will answer!',
  t1:'Look: the firefly is blinking. Remember the rhythm!',t2:'This is your program. Change numbers with − and +.',t3:'Press ▶. The lamp will blink your program.',
  i1:'A firefly blinks in the forest! Call it with your lamp.',i2:'A new firefly! It blinks differently.',i3:'This one glows longer. Watch closely!',i4:'Two quick flashes and a long pause!',i5:'Make up your own rhythm. The fireflies will answer!',
  h1:'Make the lamp blink 3 times. Change one number.',h2:'This one waits longer in the dark. Look at "wait" after "off".',h3:'It glows long and goes dark fast. And now 2 repeats.',h4:'You need two "on" inside the repeat. Add "on", "wait", "off", "wait".',h5:'Any rhythm works. Try "wait" 0.5.'},
-ES:{lang:'es',dir:'ltr',rep:'repite',tm1:'vez',tm:'veces',on:'enciende',off:'apaga',wait:'espera',run:'Ejecutar',stop:'Parar',show:'Luciérnaga',next:'Siguiente',again:'Jugar otra vez',reset:'Empezar de nuevo',help:'Pista',snd:'Sonido',up:'Arriba',dn:'Abajo',rm:'Quitar',go:'¡Vamos!',
+ES:{lang:'es',dir:'ltr',bang:'¡Fallo!',bye:'¡El Fallo huyó!',n1:'Dormilón: luciérnaga lenta',n2:'Rayo: muy rápida',n3:'Latido: late como un corazón',n4:'Gemelo: doble destello',n5:'Eco: te repite',rep:'repite',tm1:'vez',tm:'veces',on:'enciende',off:'apaga',wait:'espera',run:'Ejecutar',stop:'Parar',show:'Luciérnaga',next:'Siguiente',again:'Jugar otra vez',reset:'Empezar de nuevo',help:'Pista',snd:'Sonido',up:'Arriba',dn:'Abajo',rm:'Quitar',go:'¡Vamos!',
  stopm:'¡Alto! Puedes cambiar el programa.',resetm:'Programa nuevo. ¡Mira a la luciérnaga!',miss:'¡El Fallo parpadeó! Mira a la luciérnaga otra vez.',none:'La lámpara no parpadeó. Necesitas "enciende" y "espera".',win:'¡Lo lograste! ¡La luciérnaga vuela a la lámpara!',winf:'¡Qué ritmo! ¡La luciérnaga responde!',winf2:'¡Las luciérnagas respondieron con tu ritmo!',fin:'¡Hablas el idioma de las luciérnagas!',free:'Inventa tu ritmo y pulsa ▶. ¡Las luciérnagas responderán!',
  t1:'Mira: la luciérnaga parpadea. ¡Recuerda el ritmo!',t2:'Este es tu programa. Cambia los números con − y +.',t3:'Pulsa ▶. La lámpara parpadeará tu programa.',
  i1:'¡Una luciérnaga parpadea en el bosque! Llámala con tu lámpara.',i2:'¡Otra luciérnaga! Parpadea distinto.',i3:'Esta brilla más tiempo. ¡Mira bien!',i4:'¡Dos destellos rápidos y una pausa larga!',i5:'Inventa tu propio ritmo. ¡Las luciérnagas responderán!',
  h1:'Haz que la lámpara parpadee 3 veces. Cambia un número.',h2:'Esta espera más a oscuras. Mira "espera" después de "apaga".',h3:'Brilla mucho y se apaga rápido. Y ahora 2 repeticiones.',h4:'Necesitas dos "enciende" dentro de repite. Añade "enciende", "espera", "apaga", "espera".',h5:'Vale cualquier ritmo. Prueba "espera" 0,5.'},
-ID:{lang:'id',dir:'ltr',rep:'ulangi',tm1:'kali',tm:'kali',on:'nyalakan',off:'matikan',wait:'tunggu',run:'Jalankan',stop:'Berhenti',show:'Kunang-kunang',next:'Lanjut',again:'Main lagi',reset:'Ulang',help:'Petunjuk',snd:'Suara',up:'Naik',dn:'Turun',rm:'Hapus',go:'Ayo!',
+ID:{lang:'id',dir:'ltr',bang:'Gangguan!',bye:'Gangguan kabur!',n1:'Ngantuk: kunang-kunang pelan',n2:'Kilat: sangat cepat',n3:'Detak: berdenyut seperti jantung',n4:'Kembar: kilat ganda',n5:'Gema: mengulang kamu',rep:'ulangi',tm1:'kali',tm:'kali',on:'nyalakan',off:'matikan',wait:'tunggu',run:'Jalankan',stop:'Berhenti',show:'Kunang-kunang',next:'Lanjut',again:'Main lagi',reset:'Ulang',help:'Petunjuk',snd:'Suara',up:'Naik',dn:'Turun',rm:'Hapus',go:'Ayo!',
  stopm:'Berhenti! Kamu boleh mengubah program.',resetm:'Mulai lagi. Lihat kunang-kunangnya!',miss:'Gangguan berkedip! Lihat kunang-kunangnya sekali lagi.',none:'Lampu tidak berkedip. Kamu perlu "nyalakan" dan "tunggu".',win:'Berhasil! Kunang-kunang terbang ke lampu!',winf:'Irama yang keren! Kunang-kunang menjawab!',winf2:'Kunang-kunang menjawab dengan irama kamu!',fin:'Kamu bisa bahasa kunang-kunang!',free:'Buat irama kamu dan tekan ▶. Kunang-kunang akan menjawab!',
  t1:'Lihat: kunang-kunang berkedip. Ingat iramanya!',t2:'Ini programmu. Ubah angka dengan − dan +.',t3:'Tekan ▶. Lampu akan berkedip sesuai programmu.',
  i1:'Kunang-kunang berkedip di hutan! Panggil dengan lampumu.',i2:'Kunang-kunang baru! Kedipnya beda.',i3:'Yang ini menyala lebih lama. Perhatikan!',i4:'Dua kilatan cepat dan jeda panjang!',i5:'Buat irama sendiri. Kunang-kunang akan menjawab!',
  h1:'Buat lampu berkedip 3 kali. Ubah satu angka.',h2:'Yang ini menunggu lebih lama dalam gelap. Lihat "tunggu" setelah "matikan".',h3:'Menyala lama, padam cepat. Sekarang 2 kali ulang.',h4:'Perlu dua "nyalakan" di dalam ulangi. Tambah "nyalakan", "tunggu", "matikan", "tunggu".',h5:'Irama apa saja boleh. Coba "tunggu" 0,5.'},
-IT:{lang:'it',dir:'ltr',rep:'ripeti',tm1:'volta',tm:'volte',on:'accendi',off:'spegni',wait:'aspetta',run:'Avvia',stop:'Stop',show:'Lucciola',next:'Avanti',again:'Gioca ancora',reset:'Ricomincia',help:'Aiuto',snd:'Suono',up:'Su',dn:'Giù',rm:'Togli',go:'Via!',
+IT:{lang:'it',dir:'ltr',bang:'Glitch!',bye:'Il Glitch è scappato!',n1:'Sonnolento: lucciola lenta',n2:'Scatto: velocissima',n3:'Battito: pulsa come un cuore',n4:'Gemella: doppio lampo',n5:'Eco: ti ripete',rep:'ripeti',tm1:'volta',tm:'volte',on:'accendi',off:'spegni',wait:'aspetta',run:'Avvia',stop:'Stop',show:'Lucciola',next:'Avanti',again:'Gioca ancora',reset:'Ricomincia',help:'Aiuto',snd:'Suono',up:'Su',dn:'Giù',rm:'Togli',go:'Via!',
  stopm:'Stop! Puoi cambiare il programma.',resetm:'Si ricomincia. Guarda la lucciola!',miss:'Il Glitch ha lampeggiato! Guarda ancora la lucciola.',none:'La lampada non ha lampeggiato. Servono "accendi" e "aspetta".',win:'Ce l\'hai fatta! La lucciola vola alla lampada!',winf:'Che ritmo! La lucciola risponde!',winf2:'Le lucciole hanno risposto col tuo ritmo!',fin:'Parli la lingua delle lucciole!',free:'Inventa il tuo ritmo e premi ▶. Le lucciole risponderanno!',
  t1:'Guarda: la lucciola lampeggia. Ricorda il ritmo!',t2:'Questo è il tuo programma. Cambia i numeri con − e +.',t3:'Premi ▶. La lampada lampeggerà come il programma.',
  i1:'Una lucciola lampeggia nel bosco! Chiamala con la tua lampada.',i2:'Una nuova lucciola! Lampeggia in modo diverso.',i3:'Questa brilla più a lungo. Guarda bene!',i4:'Due lampi veloci e una pausa lunga!',i5:'Inventa il tuo ritmo. Le lucciole risponderanno!',
  h1:'Fai lampeggiare la lampada 3 volte. Cambia un numero.',h2:'Questa aspetta più a lungo al buio. Guarda "aspetta" dopo "spegni".',h3:'Brilla a lungo e si spegne in fretta. Ora 2 ripetizioni.',h4:'Servono due "accendi" dentro ripeti. Aggiungi "accendi", "aspetta", "spegni", "aspetta".',h5:'Va bene qualsiasi ritmo. Prova "aspetta" 0,5.'},
-TR:{lang:'tr',dir:'ltr',rep:'tekrarla',tm1:'kez',tm:'kez',on:'yak',off:'söndür',wait:'bekle',run:'Çalıştır',stop:'Dur',show:'Ateş böceği',next:'İleri',again:'Tekrar oyna',reset:'Baştan',help:'İpucu',snd:'Ses',up:'Yukarı',dn:'Aşağı',rm:'Kaldır',go:'Hadi!',
+TR:{lang:'tr',dir:'ltr',bang:'Arıza!',bye:'Arıza kaçtı!',n1:'Uykucu: yavaş ateş böceği',n2:'Şimşek: çok hızlı',n3:'Nabız: kalp gibi atar',n4:'İkiz: çift parıltı',n5:'Yankı: seni tekrarlar',rep:'tekrarla',tm1:'kez',tm:'kez',on:'yak',off:'söndür',wait:'bekle',run:'Çalıştır',stop:'Dur',show:'Ateş böceği',next:'İleri',again:'Tekrar oyna',reset:'Baştan',help:'İpucu',snd:'Ses',up:'Yukarı',dn:'Aşağı',rm:'Kaldır',go:'Hadi!',
  stopm:'Dur! Programı değiştirebilirsin.',resetm:'Baştan başlıyoruz. Ateş böceğine bak!',miss:'Arıza göz kırptı! Ateş böceğine bir daha bak.',none:'Lamba yanıp sönmedi. "yak" ve "bekle" lazım.',win:'Başardın! Ateş böceği lambaya uçuyor!',winf:'Ne güzel ritim! Ateş böceği cevap veriyor!',winf2:'Ateş böcekleri senin ritminle cevap verdi!',fin:'Ateş böceklerinin dilini konuşuyorsun!',free:'Kendi ritmini bul ve ▶ tuşuna bas. Ateş böcekleri cevap verecek!',
  t1:'Bak: ateş böceği yanıp sönüyor. Ritmi aklında tut!',t2:'Bu senin programın. Sayıları − ve + ile değiştir.',t3:'▶ tuşuna bas. Lamba programını yanıp söner.',
  i1:'Ormanda bir ateş böceği yanıp sönüyor! Lambanla onu çağır.',i2:'Yeni bir ateş böceği! Başka türlü yanıp sönüyor.',i3:'Bu daha uzun parlıyor. Dikkatli bak!',i4:'İki hızlı parıltı ve uzun bir bekleme!',i5:'Kendi ritmini bul. Ateş böcekleri cevap verecek!',
  h1:'Lamba 3 kez yanıp sönsün. Bir sayıyı değiştir.',h2:'Bu karanlıkta daha çok bekliyor. "söndür" sonrası "bekle"ye bak.',h3:'Uzun yanıyor, çabuk sönüyor. Şimdi 2 tekrar.',h4:'Tekrarla içinde iki "yak" lazım. "yak", "bekle", "söndür", "bekle" ekle.',h5:'Her ritim olur. "bekle" 0,5 dene.'},
-PL:{lang:'pl',dir:'ltr',rep:'powtórz',tm1:'raz',tm:'razy',on:'włącz',off:'wyłącz',wait:'czekaj',run:'Uruchom',stop:'Stop',show:'Świetlik',next:'Dalej',again:'Zagraj jeszcze raz',reset:'Od nowa',help:'Podpowiedź',snd:'Dźwięk',up:'W górę',dn:'W dół',rm:'Usuń',go:'Jedziemy!',
+PL:{lang:'pl',dir:'ltr',bang:'Usterka!',bye:'Usterka uciekła!',n1:'Śpioszek: powolny świetlik',n2:'Błysk: bardzo szybki',n3:'Puls: bije jak serce',n4:'Bliźniak: podwójny błysk',n5:'Echo: powtarza ciebie',rep:'powtórz',tm1:'raz',tm:'razy',on:'włącz',off:'wyłącz',wait:'czekaj',run:'Uruchom',stop:'Stop',show:'Świetlik',next:'Dalej',again:'Zagraj jeszcze raz',reset:'Od nowa',help:'Podpowiedź',snd:'Dźwięk',up:'W górę',dn:'W dół',rm:'Usuń',go:'Jedziemy!',
  stopm:'Stop! Możesz zmienić program.',resetm:'Od nowa. Patrz na świetlika!',miss:'Usterka mignęła! Spójrz jeszcze raz na świetlika.',none:'Lampa nie mignęła. Potrzebujesz "włącz" i "czekaj".',win:'Udało się! Świetlik leci do lampy!',winf:'Ale rytm! Świetlik odpowiada!',winf2:'Świetliki odpowiedziały twoim rytmem!',fin:'Mówisz językiem świetlików!',free:'Wymyśl swój rytm i naciśnij ▶. Świetliki odpowiedzą!',
  t1:'Patrz: świetlik mruga. Zapamiętaj rytm!',t2:'To twój program. Zmieniaj liczby przyciskami − i +.',t3:'Naciśnij ▶. Lampa zamruga według programu.',
  i1:'W lesie mruga świetlik! Przywołaj go lampą.',i2:'Nowy świetlik! Mruga inaczej.',i3:'Ten świeci dłużej. Patrz uważnie!',i4:'Dwa szybkie błyski i długa pauza!',i5:'Wymyśl własny rytm. Świetliki odpowiedzą!',
  h1:'Niech lampa mignie 3 razy. Zmień jedną liczbę.',h2:'Ten dłużej czeka w ciemności. Spójrz na "czekaj" po "wyłącz".',h3:'Świeci długo, gaśnie szybko. I teraz 2 powtórzenia.',h4:'Potrzebujesz dwóch "włącz" w powtórz. Dodaj "włącz", "czekaj", "wyłącz", "czekaj".',h5:'Każdy rytm się liczy. Spróbuj "czekaj" 0,5.'},
-PT:{lang:'pt',dir:'ltr',rep:'repete',tm1:'vez',tm:'vezes',on:'liga',off:'desliga',wait:'espera',run:'Executar',stop:'Parar',show:'Pirilampo',next:'Seguinte',again:'Jogar outra vez',reset:'Recomeçar',help:'Dica',snd:'Som',up:'Para cima',dn:'Para baixo',rm:'Tirar',go:'Vamos!',
+PT:{lang:'pt',dir:'ltr',bang:'Erro!',bye:'O Erro fugiu!',n1:'Sonolento: pirilampo lento',n2:'Veloz: muito rápido',n3:'Pulso: bate como um coração',n4:'Gémeo: duplo clarão',n5:'Eco: repete-te',rep:'repete',tm1:'vez',tm:'vezes',on:'liga',off:'desliga',wait:'espera',run:'Executar',stop:'Parar',show:'Pirilampo',next:'Seguinte',again:'Jogar outra vez',reset:'Recomeçar',help:'Dica',snd:'Som',up:'Para cima',dn:'Para baixo',rm:'Tirar',go:'Vamos!',
  stopm:'Pára! Podes mudar o programa.',resetm:'Recomeçar. Olha para o pirilampo!',miss:'O Erro piscou! Olha outra vez para o pirilampo.',none:'A lâmpada não piscou. Precisas de "liga" e "espera".',win:'Conseguiste! O pirilampo voa para a lâmpada!',winf:'Que ritmo! O pirilampo responde!',winf2:'Os pirilampos responderam com o teu ritmo!',fin:'Falas a língua dos pirilampos!',free:'Inventa o teu ritmo e carrega em ▶. Os pirilampos vão responder!',
  t1:'Olha: o pirilampo está a piscar. Lembra-te do ritmo!',t2:'Este é o teu programa. Muda os números com − e +.',t3:'Carrega em ▶. A lâmpada pisca o teu programa.',
  i1:'Um pirilampo pisca na floresta! Chama-o com a tua lâmpada.',i2:'Um pirilampo novo! Pisca de outra maneira.',i3:'Este brilha mais tempo. Olha bem!',i4:'Dois clarões rápidos e uma pausa longa!',i5:'Inventa o teu ritmo. Os pirilampos vão responder!',
  h1:'Faz a lâmpada piscar 3 vezes. Muda um número.',h2:'Este espera mais no escuro. Vê o "espera" depois de "desliga".',h3:'Brilha muito e apaga depressa. E agora 2 repetições.',h4:'Precisas de dois "liga" dentro do repete. Junta "liga", "espera", "desliga", "espera".',h5:'Qualquer ritmo serve. Experimenta "espera" 0,5.'},
-AR:{lang:'ar',dir:'rtl',rep:'كرّر',tm1:'مرة',tm:'مرات',on:'شغّل',off:'أطفئ',wait:'انتظر',run:'ابدأ',stop:'قف',show:'اليراعة',next:'التالي',again:'العب مرة أخرى',reset:'من جديد',help:'تلميح',snd:'الصوت',up:'أعلى',dn:'أسفل',rm:'احذف',go:'هيا!',
+AR:{lang:'ar',dir:'rtl',bang:'عطل!',bye:'هرب العطل!',n1:'النعسان: يراعة بطيئة',n2:'السريع: سريع جدًا',n3:'النبض: ينبض كالقلب',n4:'التوأم: وميض مزدوج',n5:'الصدى: يكرر ما تفعل',rep:'كرّر',tm1:'مرة',tm:'مرات',on:'شغّل',off:'أطفئ',wait:'انتظر',run:'ابدأ',stop:'قف',show:'اليراعة',next:'التالي',again:'العب مرة أخرى',reset:'من جديد',help:'تلميح',snd:'الصوت',up:'أعلى',dn:'أسفل',rm:'احذف',go:'هيا!',
  stopm:'قف! يمكنك تغيير البرنامج.',resetm:'من جديد. انظر إلى اليراعة!',miss:'العطل ومض! انظر إلى اليراعة مرة أخرى.',none:'المصباح لم يومض. تحتاج "شغّل" و"انتظر".',win:'نجحت! اليراعة تطير إلى المصباح!',winf:'يا له من إيقاع! اليراعة تجيب!',winf2:'اليراعات أجابت بإيقاعك!',fin:'أنت تتكلم لغة اليراعات!',free:'اخترع إيقاعك واضغط ▶. اليراعات ستجيب!',
  t1:'انظر: اليراعة تومض. تذكّر الإيقاع!',t2:'هذا برنامجك. غيّر الأرقام بالزرين − و+.',t3:'اضغط ▶. المصباح سيومض حسب برنامجك.',
  i1:'يراعة تومض في الغابة! ناده بمصباحك.',i2:'يراعة جديدة! تومض بطريقة أخرى.',i3:'هذه تضيء أطول. انتبه جيدًا!',i4:'وميضان سريعان وتوقف طويل!',i5:'اخترع إيقاعك الخاص. اليراعات ستجيب!',
@@ -292,14 +331,14 @@ var $=function(s){return document.querySelector(s)};
 var wrap=$('#wrap'),holder=$('#holder'),scene=$('#scene .in');
 function P(rep){var a=[].slice.call(arguments,1);return{rep:rep,body:a.map(function(x){return x==='on'?{t:'on'}:x==='off'?{t:'off'}:{t:'wait',n:x}})}}
 var LV=[
- {target:P(3,'on',1,'off',1),start:P(2,'on',1,'off',1),hue:75,home:[.2,.36]},
- {target:P(3,'on',1,'off',2),start:P(3,'on',1,'off',1),hue:35,home:[.31,.27]},
- {target:P(2,'on',2,'off',1),start:P(3,'on',1,'off',2),hue:175,home:[.13,.46]},
- {target:P(2,'on',1,'off',1,'on',1,'off',3),start:P(2,'on',1,'off',1),hue:305,home:[.36,.4]},
- {free:true,start:P(2,'on',1,'off',1),hue:55,home:[.22,.25]}
+ {target:P(3,'on',1,'off',1),start:P(2,'on',1,'off',1),hue:75,home:[.2,.36],m:'sleepy'},
+ {target:P(3,'on',1,'off',2),start:P(3,'on',1,'off',1),hue:35,home:[.31,.27],m:'zip'},
+ {target:P(2,'on',2,'off',1),start:P(3,'on',1,'off',2),hue:175,home:[.13,.46],m:'heart'},
+ {target:P(2,'on',1,'off',1,'on',1,'off',3),start:P(2,'on',1,'off',1),hue:305,home:[.36,.4],m:'twin'},
+ {free:true,start:P(2,'on',1,'off',1),hue:55,home:[.22,.25],m:'dance'}
 ];
 var lvl=0,prog=null,busy=false,run=null,sndOn=false,actx=null,wins=0,finale=false,finK=0,misses=0,tourStep=-1;
-var colls=[];
+var colls=[],bgf=[];var RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
 var T=window.T;var LANGS=['RU','EN','ES','ID','IT','TR','PL','PT','AR'];var lang='EN';
 function t(k){return(T[lang]&&T[lang][k])||T.EN[k]||k}
 var lastSay=null;
@@ -359,7 +398,7 @@ function helperSvg(){
   return '<svg viewBox="0 0 100 110">'+R(26,72,18,22,'#7c8590','#1b1f27')+R(56,72,18,22,'#7c8590','#1b1f27')+R(2,36,13,14,'#8b94a0','#1b1f27')+R(85,36,13,14,'#8b94a0','#1b1f27')+
   '<rect x="12" y="6" width="76" height="70" rx="6" fill="#aeb6bf" stroke="#1b1f27" stroke-width="5"/><rect x="18" y="10" width="64" height="8" fill="#c9d0d8"/>'+
   '<rect x="22" y="20" width="56" height="48" rx="3" fill="#0b1a12" stroke="#1b1f27" stroke-width="3.5"/>'+
-  '<rect x="33" y="32" width="11" height="13" fill="#5dff8a"/><rect x="56" y="32" width="11" height="13" fill="#5dff8a"/><rect x="35" y="52" width="6" height="5" fill="#5dff8a"/><rect x="41" y="56" width="18" height="5" fill="#5dff8a"/><rect x="59" y="52" width="6" height="5" fill="#5dff8a"/>'+
+  '<g class="hf1"><rect x="33" y="32" width="11" height="13" fill="#5dff8a"/><rect x="56" y="32" width="11" height="13" fill="#5dff8a"/><rect x="35" y="52" width="6" height="5" fill="#5dff8a"/><rect x="41" y="56" width="18" height="5" fill="#5dff8a"/><rect x="59" y="52" width="6" height="5" fill="#5dff8a"/></g><g class="hf2"><path d="M32 44l7-10 7 10M54 44l7-10 7 10" stroke="#5dff8a" stroke-width="5" fill="none"/><rect x="33" y="50" width="6" height="5" fill="#5dff8a"/><rect x="39" y="55" width="22" height="6" fill="#5dff8a"/><rect x="61" y="50" width="6" height="5" fill="#5dff8a"/></g>'+
   '</svg>'}
 
 /* ---------- placement ---------- */
@@ -445,9 +484,9 @@ function startRun(kind,p,done){
   function frame(now){
     if(run!==me)return;
     var t=(now-me.start)/BEAT,s=stateAt(b.ev,t);
-    if(kind==='lamp'){setLamp(s);var k=-1;for(var j=0;j<b.steps.length;j++){if(b.steps[j].t0<=t)k=b.steps[j].i;else break}if(t>=b.total)k=-1;hiTile(k)}else setWild(s);
-    if(s!==me.last){me.last=s;if(s)blip(kind==='lamp'?523:784,.09)}
-    if(t>=b.total+.45){run=null;setLamp(false);setWild(false);hiTile(-1);setRunBtn();if(done)done();return}
+    if(kind==='lamp'){setLamp(stateAt(b.ev,t-.4));var k=-1;for(var j=0;j<b.steps.length;j++){if(b.steps[j].t0<=t)k=b.steps[j].i;else break}if(t>=b.total)k=-1;hiTile(k)}else setWild(s);
+    if(s!==me.last){me.last=s;if(kind==='lamp'){if(s){beep();tapHelper();signal()}else if(me.seen)thump();me.seen=true}else if(s)blip(784,.07)}
+    if(t>=b.total+(kind==='lamp'?.85:.45)){run=null;setLamp(false);setWild(false);hiTile(-1);setRunBtn();if(done)done();return}
     me.raf=requestAnimationFrame(frame)}
   me.raf=requestAnimationFrame(frame)}
 
@@ -466,9 +505,9 @@ function judge(){
   if(same(mine,segs(build(L.target))))win(false);else miss('miss')}
 function miss(k){
   misses++;var l=$('#lamp');l.classList.remove('glitch');void l.offsetWidth;l.classList.add('glitch');
-  say(k,'oops');blip(150,.25,'sawtooth');
+  say(k,'oops');glitchBite();
   if(misses>=2)$('#btnHelp').classList.add('pulse');
-  setTimeout(function(){if(!busy&&!finale)showWild()},900)}
+  setTimeout(function(){if(!busy&&!finale)showWild()},2200)}
 
 /* ---------- win / levels ---------- */
 function wait(ms){return new Promise(function(r){setTimeout(r,ms)})}
@@ -476,18 +515,19 @@ function tween(ms,fn){return new Promise(function(res){var s=performance.now();(
 function ease(u){return u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2}
 async function win(free){
   busy=true;misses=0;$('#btnHelp').classList.remove('pulse');
-  setLamp(true);say(free?'winf':'win','cheer');cheer();jingle();
+  setLamp(true);say(free?'winf':'win','cheer');cheer();fanfareSnd();glitchFlee();
   if(free){await wait(700);setLamp(false);await new Promise(function(r){startRun('wild',LV[4].shown,r)});setLamp(true);say('winf2','cheer')}
   await wait(500);
   flying=true;var w=$('#wild'),lp=lampPos(),ang=wins*1.3,tx=lp[0]+Math.cos(ang)*(48+wins*6),ty=lp[1]-26+Math.sin(ang)*18,sx=wx,sy=wy;w.classList.add('on');
-  await tween(1500,function(u){var e=ease(u);wx=sx+(tx-sx)*e;wy=sy+(ty-sy)*e-Math.sin(Math.PI*u)*70;place(w,wx,wy)});
+  var lastp=-1;await tween(1500,function(u){var e=ease(u);wx=sx+(tx-sx)*e;wy=sy+(ty-sy)*e-Math.sin(Math.PI*u)*70;place(w,wx,wy);var pi=Math.floor(u*(RM?8:24));if(pi!==lastp){lastp=pi;burst(wx,wy,1,LV[lvl].hue)}});
+  boom(lp[0],lp[1]);salute(lp[0],lp[1]-10,LV[lvl].hue);jingle();
   var c=document.createElement('div');c.className='fly coll';c.style.setProperty('--h',LV[lvl].hue);c.innerHTML='<i class="w w1"></i><i class="w w2"></i><i class="b"></i>';$('#colls').appendChild(c);
-  colls.push({el:c,ph:wins*1.7,hue:LV[lvl].hue});w.classList.remove('on');w.classList.add('hide');flying=false;wins++;pips();
+  colls.push({el:c,ph:wins*1.7,hue:LV[lvl].hue});w.classList.remove('on');w.classList.add('hide');flying=false;wins++;pips();ring(lvl<4?[2,4,6,8][lvl]:9);addBgf(LV[lvl].hue);
   if(lvl===4)say('fin','cheer');
   busy=false;
   if(lvl<4){$('#run').hidden=true;$('#show').hidden=true;$('#next').hidden=false}
   else setTimeout(startFinale,1600)}
-function cheer(){['spark','helper'].forEach(function(id){var e=$('#'+id);e.classList.remove('cheer');void e.offsetWidth;e.classList.add('cheer')});$('#spark').classList.add('cheer')}
+function cheer(){['spark','helper'].forEach(function(id){var e=$('#'+id);e.classList.remove('cheer');void e.offsetWidth;e.classList.add('cheer')});if(!RM){var s=$('#spark');s.classList.remove('flip');void s.offsetWidth;s.classList.add('flip')}}
 function say(k,mood,btn){
   lastSay=[k,mood,btn];
   $('#captxt').textContent=t(k);var sp=$('#spark');sp.classList.remove('oops');if(mood==='oops')sp.classList.add('oops');
@@ -499,15 +539,15 @@ function loadLevel(n){
   $('#run').hidden=false;$('#show').hidden=false;$('#next').hidden=true;
   var w=$('#wild');w.classList.remove('hide','on');w.style.setProperty('--h',L.hue);flying=false;homeWild();setLamp(false);
   $('#show').hidden=!!L.free;
-  pips();render();say('i'+(n+1));
+  ['spark','helper'].forEach(function(id){$('#'+id).classList.remove('cheer','flip','oops')});nameChip();pips();render();say('i'+(n+1));
   if(n===0)startTour();else setTimeout(function(){if(!busy&&!run&&lvl===n)showWild()},900)}
 function startFinale(){
-  finale=true;stopRun();$('#wrap').classList.add('fin');$('#beacon').classList.add('lit');finK=0;setLamp(true);
+  finale=true;stopRun();$('#wrap').classList.add('fin');$('#beacon').classList.add('lit');finK=0;setLamp(true);ring(9);[0,350,700,1050].forEach(function(d,i){setTimeout(function(){if(finale){var x=SW*(.25+.17*i),y=SH*(.2+.08*(i%2));boom(x,y);salute(x,y,[60,180,300,30][i])}},d)});
   say('fin','cheer');cheer();jingle();fanfare=performance.now()}
 var fanfare=0;
 function again(){
   finale=false;wins=0;$('#wrap').classList.remove('fin');$('#beacon').classList.remove('lit');
-  colls.forEach(function(c){c.el.remove()});colls=[];LV[4].shown=null;setLamp(false);loadLevel(0)}
+  colls.forEach(function(c){c.el.remove()});colls=[];bgf.forEach(function(c){c.el.remove()});bgf=[];ring(0);LV[4].shown=null;setLamp(false);loadLevel(0)}
 
 /* ---------- ambient loop ---------- */
 function ambient(now){
@@ -519,7 +559,14 @@ function ambient(now){
     var k=ease(finK);place(c.el,x1+(x2-x1)*k,y1+(y2-y1)*k);
     c.el.style.opacity=.75+.25*Math.sin(t*3+i*2);
     c.el.classList.toggle('big',finale)}
-  if(!flying&&!busy&&!finale&&!$('#wild').classList.contains('hide')){place($('#wild'),wx+Math.sin(t*1.3)*5,wy+Math.cos(t*1.7)*4)}
+  for(i=0;i<bgf.length;i++){var q=bgf[i];place(q.el,SW*q.x+Math.sin(t*.7+q.ph)*18,SH*q.y+Math.cos(t*.9+q.ph)*10);q.el.style.opacity=.45+.4*Math.sin(t*2+q.ph*3)}
+  if(!flying&&!busy&&!finale&&!$('#wild').classList.contains('hide')){var m=LV[lvl].m,dx=0,dy=0,sc=1;
+    if(m==='sleepy'){dx=Math.sin(t*.6)*4;dy=Math.cos(t*.5)*7;sc=.9}
+    else if(m==='zip'){dx=Math.sin(t*3.1)*11;dy=Math.cos(t*4.3)*8}
+    else if(m==='heart'){dx=Math.sin(t)*3;dy=Math.cos(t*1.2)*3;sc=1+.28*Math.pow(Math.max(0,Math.sin(t*6.5)),6)}
+    else if(m==='twin'){dx=Math.sin(t*1.5)*13;dy=Math.sin(t*3)*5}
+    else{dx=Math.cos(t*1.2)*15;dy=Math.sin(t*1.2)*10}
+    var wl=$('#wild');wl.style.scale=sc;place(wl,wx+dx,wy+dy)}
   requestAnimationFrame(ambient)}
 
 /* ---------- tour / help ---------- */
@@ -549,6 +596,61 @@ function jingle(){[523,659,784,1047].forEach(function(f,i){setTimeout(function()
 function toggleSnd(){sndOn=!sndOn;if(sndOn&&!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)()}catch(e){sndOn=false}}
   $('#btnSnd').innerHTML='<svg class="ic"><use href="#i-'+(sndOn?'snd':'mute')+'"/></svg>';if(sndOn)blip(660,.12)}
 
+
+function glitchSvg(){
+  var rows=['...X....X...','..XXXXXXXX..','.XXXXXXXXXX.','.XXWWXXWWXX.','.XXWKXXKWXX.','.XXXXXXXXXX.','.XXKXXXXKXX.','.XXXKKKKXXX.','..XXXXXXXX..','..X.X..X.X..'],o='',i,j,c;
+  for(i=0;i<rows.length;i++)for(j=0;j<12;j++){c=rows[i][j];if(c==='.')continue;
+    var f=c==='X'?((i*7+j*3)%5===0?'#b06bff':(i+j)%4===0?'#6f2fd6':'#8e44ff'):c==='W'?'#fff35c':'#1a0a33';
+    o+='<rect x="'+j+'" y="'+i+'" width="1.02" height="1.02" fill="'+f+'"/>'}
+  return '<svg viewBox="0 0 12 10">'+o+'</svg>'}
+function starPoly(){var pts=[],n=14,i,a,r;for(i=0;i<n*2;i++){a=Math.PI*i/n;r=i%2?38:50;pts.push((50+Math.cos(a)*r*1.9).toFixed(1)+'% '+(50+Math.sin(a)*r*1.0).toFixed(1)+'%')}return 'polygon('+pts.join(',')+')'}
+function mk(id,html,cls){var d=document.createElement('div');d.id=id;if(cls)d.className=cls;if(html)d.innerHTML=html;scene.appendChild(d);return d}
+var gl=mk('glitch',glitchSvg()),bang=mk('bang','<span></span>'),boomEl=mk('boom'),flashEl=mk('flash'),fname=mk('fname');
+bang.style.setProperty('--star',starPoly());
+function burst(x,y,n,hue,deb){
+  if(RM)n=Math.ceil(n/3);
+  for(var i=0;i<n;i++){var e=document.createElement('i');e.className='pt'+(deb?' deb':'');e.style.setProperty('--h',deb?0:(hue+(i%5)*14));if(deb)e.style.background=['#ffd24a','#ffbf2f','#5a4538','#8e44ff'][i%4];
+    e.style.left=x+'px';e.style.top=y+'px';scene.appendChild(e);
+    var a=Math.random()*Math.PI*2,d=deb?(20+Math.random()*30):(40+Math.random()*70),dx=Math.cos(a)*d,dy=Math.sin(a)*d+(deb?60:25);
+    var an=e.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:'translate('+dx+'px,'+dy+'px) scale(.2)',opacity:0}],{duration:deb?800:900+Math.random()*500,easing:'cubic-bezier(.1,.7,.4,1)'});
+    an.onfinish=(function(el){return function(){el.remove()}})(e)}}
+function showBang(k,x,y,good){bang.firstChild.textContent=t(k);bang.className=good?'good':'';place(bang,x,y);void bang.offsetWidth;bang.classList.add('show');clearTimeout(bang._t);bang._t=setTimeout(function(){bang.classList.remove('show')},1000)}
+function boom(x,y,strong){
+  boomEl.style.setProperty('--bx',x+'px');boomEl.style.setProperty('--by',y+'px');boomEl.classList.remove('go');flashEl.classList.remove('go');void boomEl.offsetWidth;boomEl.classList.add('go');
+  flashEl.style.opacity='';if(!RM)flashEl.classList.add('go');
+  if(!RM){var sc=$('#scene');sc.classList.remove('shake');void sc.offsetWidth;sc.classList.add('shake')}}
+function salute(x,y,hue){burst(x,y,30,hue);[[-50,-30,160],[50,-40,300],[0,-70,60]].forEach(function(o,i){setTimeout(function(){burst(x+o[0],y+o[1],20,(hue+o[2])%360)},180+i*200)})}
+function glitchPos(){return[SW*.5+SW*.08,SH*(wrap.className==='land'?.64:.62)]}
+async function glitchBite(){
+  var g=gl,lp=$('#lampbox'),lx=parseFloat(lp.style.left),ly=parseFloat(lp.style.top)-30,sp=glitchPos(),sx=sp[0],sy=sp[1];
+  setLamp(true);place(g,sx,sy);g.style.opacity=1;g.style.scale=.3;
+  await tween(240,function(u){g.style.scale=.3+.7*ease(u)});
+  await tween(360,function(u){var e=ease(u);place(g,sx+(lx-30-sx)*e,sy+(ly-sy)*e-Math.sin(Math.PI*u)*26)});
+  setLamp(false);var l=$('#lamp');l.classList.remove('bite');void l.offsetWidth;l.classList.add('bite');
+  burst(lx,ly,14,0,true);showBang('bang',lx-10,ly-62);crunch();
+  await wait(520);
+  await tween(200,function(u){g.style.scale=1+.18*Math.sin(u*Math.PI*4)});blip(900,.05,'square');setTimeout(function(){blip(1100,.05,'square')},90);
+  await tween(380,function(u){var e=ease(u);place(g,lx-30+(sx-lx+30)*e,ly+(sy-ly)*e);g.style.scale=1-.7*e});
+  g.style.opacity=0}
+async function glitchFlee(){
+  var g=gl,sp=glitchPos(),sx=sp[0],sy=sp[1],tx=SW+70,ty=SH*.08;
+  place(g,sx,sy);g.style.opacity=1;g.style.scale=.3;
+  await tween(220,function(u){g.style.scale=.3+.7*ease(u)});
+  showBang('bye',SW*.62,SH*.3,true);blip(1300,.12,'square');
+  await tween(750,function(u){var e=u*u;place(g,sx+(tx-sx)*e,sy+(ty-sy)*e-Math.sin(Math.PI*u)*30);g.style.scale=1-.4*u;g.style.rotate=(u*540)+'deg'});
+  g.style.opacity=0;g.style.rotate='0deg'}
+function ring(n){var L=document.querySelectorAll('#beacon .lamp');for(var i=0;i<L.length;i++)L[i].classList.toggle('lt',i<n)}
+function addBgf(h){for(var k=0;k<3;k++){var c=document.createElement('div');c.className='fly bgf coll';c.style.setProperty('--h',h+k*12);c.innerHTML='<i class="w w1"></i><i class="w w2"></i><i class="b"></i>';$('#colls').appendChild(c);bgf.push({el:c,x:.06+Math.random()*.88,y:.3+Math.random()*.28,ph:Math.random()*6})}}
+function tapHelper(){var h=$('#helper');h.classList.remove('tap');void h.offsetWidth;h.classList.add('tap')}
+function signal(){var d=$('#dust'),l=parseFloat(d.style.left),w=parseFloat(d.style.width),tp=parseFloat(d.style.top)+4;var e=document.createElement('i');e.className='sig';e.style.left=l+'px';e.style.top=tp+'px';scene.appendChild(e);
+  var an=e.animate([{left:l+'px'},{left:(l+w-14)+'px'}],{duration:240,easing:'linear'});an.onfinish=function(){e.remove()}}
+function beep(){blip(880,.09,'square')}
+function thump(){if(!sndOn||!actx)return;try{var o=actx.createOscillator(),g=actx.createGain();o.type='sine';o.frequency.setValueAtTime(200,actx.currentTime);o.frequency.exponentialRampToValueAtTime(55,actx.currentTime+.16);g.gain.setValueAtTime(.16,actx.currentTime);g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+.18);o.connect(g);g.connect(actx.destination);o.start();o.stop(actx.currentTime+.2)}catch(e){}}
+function crunch(){if(!sndOn||!actx)return;try{[0,.13].forEach(function(dl){var n=Math.floor(actx.sampleRate*.09),b=actx.createBuffer(1,n,actx.sampleRate),d=b.getChannelData(0);for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n);var s=actx.createBufferSource(),f=actx.createBiquadFilter(),g=actx.createGain();f.type='bandpass';f.frequency.value=1200;g.gain.value=.35;s.buffer=b;s.connect(f);f.connect(g);g.connect(actx.destination);s.start(actx.currentTime+dl)})}catch(e){}}
+function fanfareSnd(){[523,659,784,659,784,1047,1319].forEach(function(f,i){setTimeout(function(){blip(f,.16)},i*95)})}
+function nameChip(){var n=$('#fname');n.textContent=t('n'+(lvl+1));n.style.borderLeftColor='hsl('+LV[lvl].hue+' 100% 55%)'}
+setInterval(function(){if(RM||document.hidden||finale)return;var e=document.createElement('i');e.className='star';e.style.left=(35+Math.random()*55)+'%';e.style.top=(4+Math.random()*18)+'%';scene.appendChild(e);setTimeout(function(){e.remove()},1000)},9000);
+
 /* ---------- init ---------- */
 buildBg();buildBeacon();
 $('#lamp').innerHTML=lampSvg();$('#helper').innerHTML=helperSvg();$('#spark').innerHTML=sparkSvg();
@@ -567,7 +669,7 @@ function setLang(code){
   $('#langBar').innerHTML=LANGS.map(function(c){return '<button class="lb'+(c===code?' on':'')+'" type="button" data-l="'+c+'">'+c+'</button>'}).join('');
   document.querySelectorAll('[data-t]').forEach(function(n){n.textContent=t(n.dataset.t)});
   document.querySelectorAll('[data-a]').forEach(function(n){n.setAttribute('aria-label',t(n.dataset.a))});
-  if(prog)render();setRunBtn();
+  if(prog)render();setRunBtn();nameChip();
   if(lastSay)say(lastSay[0],lastSay[1],lastSay[2]);
   fit()}
 $('#langBar').addEventListener('click',function(e){var b=e.target.closest('[data-l]');if(b)setLang(b.dataset.l)});
